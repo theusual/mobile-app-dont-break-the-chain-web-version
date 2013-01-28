@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="468"
+   height="60"
+   id="svg2991">
+  <defs
+     id="defs2993" />
+  <metadata
+     id="metadata2996">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <path
+       d="M 24.166665,34.166667 17.773304,26.213938 7.5975414,26.972111 13.18538,18.434135 9.3198307,8.9906974 l 9.8468343,2.6759706 7.786723,-6.5945384 0.49784,10.1918164 8.678008,5.367789 -9.539153,3.622918 z"
+       transform="matrix(1.8613624,0,0,1.5504328,12.115136,0.86750703)"
+       id="path2999"
+       style="fill:#ffff00,fill-rule:evenodd,stroke:#000000,stroke-width:1px,stroke-linecap:butt,stroke-linejoin:miter,stroke-opacity:1" />
+    <path
+       d="m 424.16666,35 -8.87458,-6.728178 -10.57364,3.496357 3.65648,-10.519344 -6.59267,-8.9757 11.13441,0.226865 6.49915,-9.0436442 3.22496,10.6595542 10.60936,3.386421 -9.14127,6.361101 z"
+       transform="matrix(1.8008089,0,0,1.4818645,-333.93405,1.9846238)"
+       id="path3001"
+       style="fill:#ffff00,fill-rule:evenodd,stroke:#000000,stroke-width:1px,stroke-linecap:butt,stroke-linejoin:miter,stroke-opacity:1" />
+    <text
+       x="115"
+       y="44.166668"
+       id="text3003"
+       xml:space="preserve"
+       style="font-size:40px,font-style:normal,font-weight:normal,line-height:125%,letter-spacing:0px,word-spacing:0px,fill:#000000,fill-opacity:1,stroke:none,font-family:Sans"><tspan
+         x="115"
+         y="44.166668"
+         id="tspan3005">FANTASTIC!</tspan></text>
+  </g>
+</svg>

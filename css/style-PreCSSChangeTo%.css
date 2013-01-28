@@ -1,0 +1,388 @@
+/**************************** CSS Reset  ****************************/
+
+
+/**************************** General ****************************/
+p{
+	color:#036;
+	font-size:13px;
+	vertical-align: auto;
+	text-align: center;
+	float: none;
+}
+
+/**************************** Calendar ****************************/
+#calendar{
+	margin: 0 auto;
+	padding-top: 10px;
+	width: 728px;
+	text-align: center;
+	position: relative;
+}
+
+#calcontainer{
+	float:left;
+	margin-bottom:0px;
+	width: 92.5%;
+	border:2px solid #e5e5e5;
+	background:white;
+}
+
+.calHeader{
+	width:100%;
+	height:38px;
+	/**height:46px**/
+	position:relative;
+	font-family:"Arial Black", Gadget, sans-serif;
+	background:white;
+}
+.calHeader p{
+	margin:0;S
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	height: inherit;
+	display:inline-block; 
+	vertical-align:middle
+}
+.headerImg{
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	height: inherit;
+}
+.calTitle{
+	width:56%;
+	height:38px;
+	/**height:46px**/
+	float:left;
+	text-align:center;
+	background:white;
+}
+.calTitle h2{
+	line-height:1.1;
+	margin-top:1px;
+	font-size:28px;
+	/**font-size:32px**/
+	color:#FFF;
+	text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+				 -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+				 -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+				 0 0 0.3em #006, 0 0 0.2em #006,
+        		 0 0 0.3em #006, 0 0 0.3em #006;	
+}
+
+.previousMonth{
+	width:22%;
+	float:left;
+	height:38px;
+	/**height:46px**/
+	cursor:pointer;
+}
+.nextMonth{
+	width:22%;
+	float:right;
+	height:38px;
+	/**height:46px**/
+	cursor:pointer;
+}
+
+#daysmonth{
+	clear:both;
+	margin-bottom:0px;
+}
+.daysweek{	
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	height: inherit;
+}
+.dayweek{
+	width:95px;
+	height:18px;
+	/**height:22px**/
+	float:left;
+	border-right:1px solid #e5e5e5;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	height: inherit;
+}
+.dayweek p{
+	display:block;
+	text-align:center;
+	font-size:16px;
+	line-height:18px;
+	/**line-height:22px**/
+	text-shadow:0 1px 0 #ffffff;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	height: inherit;}
+
+.week{overflow:auto;border-top:1px solid #c2c2c2;}
+.weeku{overflow:auto;border-top:1px solid #c2c2c2;border-bottom:1px solid #e5e5e5;}
+
+.today{background:#fffcdf;border-right:1px solid #e5e5e5;}
+.today .daybar{background:#fffac1;}
+
+.day{width:95px;float:left;border-right:1px solid #e5e5e5;}
+.daybrn{float:left; width:97px}
+.dayOtherMonth{width:95px;float:left;border-right:1px solid #e5e5e5;background:#f4f9fc}
+.brn{border-right:none}
+.bun{border-bottom:none;}
+
+.day:hover{background:#e9f0f8;cursor:pointer;}
+.daybrn:hover{background:#e9f0f8;cursor:pointer;}
+.dayOtherMonth:hover{background:#e9f0f8;cursor:pointer;}
+
+.daybar{width:100%;float:left;background:#e0ecf3;}
+.daybarOtherMonth{width:100%;float:left;background:#e0ecf3;}
+.daybar p{margin-left:5px;margin-top:3px;margin-bottom:3px;font-size:15px;font-weight:bold;color:#969696;text-shadow:0 1px 0 #ffffff;}
+.daybarOtherMonth p{margin-left:5px;margin-top:3px;margin-bottom:3px;font-size:15px;color:#969696;}
+
+
+.dots{
+	width:95%%;
+	clear:both;
+	padding-left: 2px;
+}
+.goaldot{width:22px;height:22px;clear:none;float:left;}
+
+/**************************** Colors ****************************/
+.none{background:#d6d6d6;}
+.none:hover{background:#dfdfdf;}
+.blue{background:#00ffff;}
+.blue:hover{background:#00ffff;}
+.red{background:#e50000;}
+.red:hover{background:#ff6164;}
+.orange{background:#f97306;}
+.orange:hover{background:#f97306;}
+.green{background:#01ff07;}
+.green:hover{background:#98e857;}
+.brown{background:#c9ae74;}
+.brown:hover{background:#c9ae74;}
+.pink{background:#ff028d;}
+.pink:hover{background:#ff796c;}
+.yellow{background:#ffff14;}
+.yellow:hover{background:#ffff14;}
+.purple{background:#9a0eea;}
+.purple:hover{background:#9a0eea;}
+
+/**************************** Legend ****************************/
+.legend{
+	float:right;
+	border-radius:15px;
+	border: 2px solid #e5e5e5;
+	background:white;
+	margin:0;
+	width:101%;
+	font-size:100%;
+	height: auto;
+}
+.p{
+
+	float:left; 
+	cursor:pointer; 
+	font-size:20px
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	height: inherit;
+	font-weight:bold;
+}
+.goalDesc{
+	float:right;
+	width:100%;
+	border-radius:15px;
+	margin-left:0px;
+	margin-top:0px;
+	margin-right:0px;
+	cursor:pointer;
+	height: auto;
+	padding-left: 0px;
+	/**border: 1px solid #e5e5e5;**/
+	border-width: 1px;
+	border-color: #039;
+}
+.goalDesc:hover{
+	border: 1px solid #3CF;
+	/**background: #CCC;**/
+}
+.goalDescSelected{
+	float:right;
+	width:100%;
+	border-radius:15px;
+	margin-left:0px;
+	margin-top:0px;
+	margin-right:0px;
+	cursor:pointer;
+	height: auto;
+	padding-left: 0px;
+	border: 1px solid #e5e5e5;
+	background: #3CF;
+}
+.goalDescSelected:hover{
+	border: 1px solid #3CF;
+	/**background: #CCC;**/
+}
+.goalLine{
+}
+.goalLine:hover{
+	border: 1px solid #e5e5e5;
+}
+.goalDot{
+	margin:0;
+	float:left;
+	width:25px;
+	height:25px;
+	border-radius:15px;
+	margin-left:3px;
+	margin-top:6px;
+	margin-right:3px;
+	cursor:pointer;
+}
+.goalText{
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	vertical-align:baseline;
+	height: inherit;
+	float:left;
+	width:80%;
+	border-radius:5px;
+	margin-left:2px;
+	margin-right:0px;
+	text-height: auto;
+}
+.legendContainer{
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	height:inherit;
+	position:absolute;
+	z-index:10000;
+	width: 40%;
+	height: 80%;
+	padding-left:7px;
+	display:inline-block;
+	overflow: hidden; 
+	top:5%;
+	left:60%;
+	
+	-moz-box-shadow:0 0 30px 5px #000;
+    -webkit-box-shadow: 0 0 30px 5px #000;
+}
+.update-goals-label-left{
+	display:inline-block;
+	font-size:16px;
+	line-height:1;
+	font-weight:bold;
+	text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+				 -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+				 -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+				 0 0 0.3em #006, 0 0 0.2em #006,
+        		 0 0 0.3em #006, 0 0 0.3em #006;
+				 
+}
+.update-goals-label-right{
+	display:inline-block;
+	font-size:16px;
+	line-height:1;
+	font-weight:bold;
+	text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+				 -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+				 -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+				 0 0 0.3em #006, 0 0 0.2em #006,
+        		 0 0 0.3em #006, 0 0 0.3em #006;
+				 
+}
+.update-goals-label-x-left{
+	width:16.5%;
+	margin:0 1% 0 2.5%;
+	display:inline-block; 
+	text-align:right;
+}
+.update-goals-label-x-right{
+	width:26.5%;
+	margin:0 1% 0 5%;
+	padding-left:0%; 
+	display:inline-block;
+	text-align:right;
+}
+.update-goals-input-left{
+	width:28%;
+	display:inline-block;
+	margin:0 1% 0 0;
+}
+.update-goals-input-right{
+	width:31.5%;
+	display:inline-block;
+}
+.update-goals-input-x-left{
+ 	width:11%;
+	display:inline-block;
+	margin:0 5% 0 0;
+}
+.update-goals-input-x-right{
+ 	width:11%;
+	display:inline-block;
+	margin:0 5% 0 0;
+}
+.update-goals-label-n-right{
+	width:7.5%;
+	margin:0 1% 0 1%;
+	display:inline-block;
+	text-align:right;
+	line-height:1.8;
+}
+
+
+/*****JQM CSS Overrides*****/
+.ui-btn-inner{
+	padding:4px 4px;
+}
+.ui-body-c,
+.ui-overlay-c {
+	border: 0px solid 		#aaa /*{c-body-border}*/;
+	color: 					#333333 /*{c-body-color}*/;
+	text-shadow: 0 /*{c-body-shadow-x}*/ 1px /*{c-body-shadow-y}*/ 0 /*{c-body-shadow-radius}*/ #fff /*{c-body-shadow-color}*/;
+	background: 			#B6CAFE /*{c-body-background-color}*/;
+	/*background-image: -webkit-gradient(linear, left top, left bottom, from( #f9f9f9 /*{c-body-background-start}*//*), to( #eeeeee*/ /*{c-body-background-end}*/)); /* Saf4+, Chrome */
+	/*background-image: -webkit-linear-gradient( #f9f9f9 /*{c-body-background-start}*//*, #eeeeee *//*{c-body-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eeeeee /*{c-body-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eeeeee /*{c-body-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eeeeee /*{c-body-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #f9f9f9 /*{c-body-background-start}*/, #eeeeee /*{c-body-background-end}*/);
+}
+
+.ui-dialog-contain {
+	margin:17% auto 15px auto;
+	max-width:600px;
+	top:-95px;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #444 /*{a-body-background-start}*/), to( #222 /*{a-body-background-end}*/));
+	background-image: -webkit-linear-gradient( #444 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/);
+	background-image: -moz-linear-gradient( #444 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/);
+	background-image: -ms-linear-gradient( #444 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/);
+	background-image: -o-linear-gradient( #444 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/);
+	background-image: linear-gradient( #444 /*{a-body-background-start}*/, #222 /*{a-body-background-end}*/);
+} 
+
+
