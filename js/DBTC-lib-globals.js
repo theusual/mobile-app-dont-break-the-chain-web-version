@@ -8,7 +8,7 @@
 			//Set current App settings
 				$.AppSettings = 
 					{
-						dbVersion: '.59',
+												dbVersion: '.59',
 						testing: 'false'
 					};	
 			//Run tests			
