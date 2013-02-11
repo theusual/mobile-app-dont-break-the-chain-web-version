@@ -13,7 +13,7 @@ function drawXsvg(clickedDayDiv, DrawColor)
 		
 function unDrawXsvg(clickedDayDiv, DrawColor)
 	{
-		alert('UNdrawing X'+ clickedDayDiv);
+		//alert('UNdrawing X'+ clickedDayDiv);
 		var paper = new Raphael(clickedDayDiv, 22,  22);
 		var line = paper.path("M2 2 22 22 z").attr({stroke: DrawColor, 'stroke-width': 6});
 		var line2 = paper.path("M22 2 2 22 z").attr({stroke: DrawColor, 'stroke-width': 6});

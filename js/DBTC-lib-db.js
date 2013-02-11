@@ -59,10 +59,10 @@ function createDB()
 					DrawDotDiv: '#goal1dot',
 					DrawDayDiv: '',
 					DrawColor: '#00ffff',
-					NextGoal: 1,
 					MaxCount: 0,	
 					defaultGoalColor: ['#FFFFFF','#06fdfd','#e50000','#f97306','#01ff07',
-									   '#c9ae74','#ff028d','#F2DA00','#9a0eea','#00349B','#ffff96']			
+									   '#c9ae74','#ff028d','#F2DA00','#9a0eea','#00349B','#ffff96'],
+					goalsSortOrder: [1,2,3]			
 					};
 					
 				//Goal Tables
@@ -83,8 +83,9 @@ function createDB()
 			$.Goal2.Active = 1;
 			$.Goal3.Active = 1;
 								
-			//Write the newly created goal and settings objects to local storage
-			$.localStorage.setObject("CurrentUserSettings",$.CurrentUserSettings);
+			//Write the newly created goal and settings objects to DB
+			//$.localStorage.setObject("CurrentUserSettings",$.CurrentUserSettings);
+			updateDB_CurrentSettings();
 			updateDB_Goal('ALL');
 	}
 	
@@ -106,7 +107,6 @@ function loadDB()
 function checkDay(ClickedDate) //Check for existance of the clicked day in the selected goal table
 	{	
 		var DateFound;
-		//alert("Checking Day, current selected goal:" + $.CurrentUserSettings.SelectedGoal);
 		//Search to see if the date is found in the DayDate array
 		DateFound = $["Goal"+$.CurrentUserSettings.SelectedGoal].DayDate.indexOf(ClickedDate);	
 		return DateFound;
@@ -123,9 +123,8 @@ function insertDay(ClickedDate) //Insert the clicked day into the selected goal 
 	}
 	
 
-function removeDay(ClickedDate, DayDBLocation) //Insert the clicked day into the selected goal table
+function removeDay(ClickedDate, DayDBLocation) //Remove the clicked day from the selected goal table
 	{			
-		//alert('Removing goal:' + $.CurrentUserSettings.SelectedGoal);	
 		//update object
 		$["Goal"+$.CurrentUserSettings.SelectedGoal].DayDate.splice(DayDBLocation,1);		
 		//update the databases
@@ -135,7 +134,6 @@ function removeDay(ClickedDate, DayDBLocation) //Insert the clicked day into the
 //function to clear goal progress for a single goal
 function clearGoal(goalNum)
 	{		
-		alert('Clearing goal:' + goalNum);
 		//undraw calendar Xs to reflect the newly cleared goals
 		unloadXs(goalNum);
 		
@@ -151,8 +149,14 @@ function clearGoal(goalNum)
 function updateDB_Goal(goalNum) //Write back goal info to the databases, send either goal names in the form of 'goal1' or send 'ALL' to write back all goals to DB
 	{		
 		//alert('Updating goal' + goalNum);
-		$.localStorage.setObject('Goal'+goalNum, $["Goal"+goalNum]);
 		if(goalNum === 'ALL')
 			for (var i = 1; i<11 ; i++)
-				$.localStorage.setObject('Goal'+i, $["Goal"+i]);		
+				$.localStorage.setObject('Goal'+i, $["Goal"+i]);	
+		else
+			$.localStorage.setObject('Goal'+goalNum, $["Goal"+goalNum]);	
+	}
+
+function updateDB_CurrentSettings()
+	{
+		$.localStorage.setObject("CurrentUserSettings",$.CurrentUserSettings);
 	}

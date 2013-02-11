@@ -8,7 +8,7 @@
 			//Set current App settings
 				$.AppSettings = 
 					{
-												dbVersion: '.59',
+						dbVersion: '.64',
 						testing: 'false'
 					};	
 			//Run tests			
@@ -44,8 +44,6 @@
 			//initiate the legend to highlight the current selected goal
 				setGoal($.CurrentUserSettings.SelectedGoal);
 				
-			
-
 });	
 
 $(document).ready(function(){
@@ -188,7 +186,6 @@ function buildMonthDates()
 				$('#calRow1Col'+j).find('#daybar').html('<p>' + (j-startingDay) + '</p>');
 				currentMonthCounter++;
 			}
-			//alert($('#calRow1Col'+j).find('#dotContainer').attr('data-date'));
 		}
 		
 		//iterate through the middle 4 rows of days
@@ -264,270 +261,106 @@ function buildMonthDates()
 	
 function loadXs(goalNum)
 	{
-		//clear each day div of any Xs drawn the previous month, by emptying all divs with a class of .goaldot
 		if (goalNum === 'all')
+		{	
+			//empty all divs prior to redrawing all Xs
 			$(".goaldot").empty();
-		
-		if (goalNum === '1' || goalNum === 'all')
-		{
-			//iterate through each goal table if it contains data. drawing an X for each date found in the table
-			if ($.Goal1.DayDate.length > 0)
+			//iterate through each goal table if it contains data. draw an X for each date found in the table.  Note: Using iterator variable j instead of goalnum
+			for(var j = 1; j<9; j++)
 			{
-				for (var i = 0; i < $.Goal1.DayDate.length; i++)
-					{
-					 //account for null values in the table
-					  if($.Goal1.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal1.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal1dot')[0];	  
-							  drawXsvg(DayDOM,$.Goal1.XColor);	
-						  }
-						}
-					}
-			}
-		}	
-		if (goalNum === '2' || goalNum === 'all')
-		{
-			if ($.Goal2.DayDate.length > 0)
-			{
-				//alert('Records found in Goal2:' + $.Goal2.DayDate.length);	
-				for (var i = 0; i < $.Goal2.DayDate.length; i++)
-					{
-					  if($.Goal2.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal2.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal2dot')[0];	
-							  //alert($.Goal2.DayDate[i]);	  
-							  drawXsvg(DayDOM,$.Goal2.XColor);	
-						  }
-						}		  
-					}
-			}
-		}
-		if (goalNum === '3' || goalNum === 'all')
-		{
-			if ($.Goal3.DayDate.length > 0)
-			{
-				for (var i = 0; i < $.Goal3.DayDate.length; i++)
-					{
-					  if($.Goal3.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal3.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal3dot')[0];		  
-							  drawXsvg(DayDOM,$.Goal3.XColor);	
-						  }
-						}		  
-					}
-			}
-		}
-		if (goalNum === '4' || goalNum === 'all')
-		{
-			if ($.Goal4.DayDate.length > 0)
-			{
-				for (var i = 0; i < $.Goal4.DayDate.length; i++)
-					{
-					  if($.Goal4.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal4.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal4dot')[0];	
-							  drawXsvg(DayDOM,$.Goal4.XColor);	
-						  }
-						}		  
-					}
-			}
-		}
-		if (goalNum === '5' || goalNum === 'all')
-		{
-			if ($.Goal5.DayDate.length > 0)
-			{
-				for (var i = 0; i < $.Goal5.DayDate.length; i++)
-					{
-					  if($.Goal5.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal5.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal5dot')[0];	
-							  drawXsvg(DayDOM,$.Goal5.XColor);	
-						  }
-						}		  
-					}
-			}
-		}
-		if (goalNum === '6' || goalNum === 'all')
-		{
-			if ($.Goal6.DayDate.length > 0)
-			{
-				for (var i = 0; i < $.Goal6.DayDate.length; i++)
-					{
-					  if($.Goal6.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal6.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal6dot')[0];	
-							  drawXsvg(DayDOM,$.Goal6.XColor);	
-						  }
-						}		  
-					}
-			}
-		}
-		if (goalNum === '7' || goalNum === 'all')
-		{
-			if ($.Goal7.DayDate.length > 0)
-			{
-				for (var i = 0; i < $.Goal7.DayDate.length; i++)
-					{
-					  if($.Goal7.DayDate[i] !== null)
-						{	  
-						  var DayObj = $(document).find("[data-date='" + $.Goal7.DayDate[i] + "']")
-						  if(DayObj.attr('data-date') !== undefined)
-						  {
-							  var DayDOM = DayObj.find('#goal7dot')[0];	
-							  drawXsvg(DayDOM,$.Goal7.XColor);	
-						  }
-						}		  
-					}
-			}
-		}
-		if (goalNum === '8' || goalNum === 'all')
-		{
-			if ($.Goal8.DayDate.length > 0)
-			{
-				for (var i = 0; i < $.Goal8.DayDate.length; i++)
+				if ($["Goal"+j].DayDate.length > 0)
 				{
-				  if($.Goal8.DayDate[i] !== null)
-					{	  
-					  var DayObj = $(document).find("[data-date='" + $.Goal8.DayDate[i] + "']")
-					  if(DayObj.attr('data-date') !== undefined)
-					  {
-						  var DayDOM = DayObj.find('#goal8dot')[0];	
-						  drawXsvg(DayDOM,$.Goal8.XColor);	
-					  }
-					}		  
+					for (var i = 0; i < $["Goal"+j].DayDate.length; i++)
+					 {
+					  if($["Goal"+j].DayDate[i] !== null)
+						{	  
+						  var DayObj = $(document).find("[data-date='" + $["Goal"+j].DayDate[i] + "']");
+						  if(DayObj.attr('data-date') !== undefined)
+						  {
+							  var DayDOM = DayObj.find("#goal"+j+"dot")[0];
+					          drawXsvg(DayDOM,$["Goal"+j].XColor);	
+						  }
+						}		  
+					 }
 				}
 			}
-		}
-	}
-	
-function unloadXs(goalNum)
-	{
-		//clear each day div of any Xs drawn the previous month, by emptying all divs with a class of .goaldot
-		/*
-		 if (goalNum === 'all')
-			$(".goaldot").empty();
-		else
-		{
-			alert('Emptying: ' + $.CurrentUserSettings.DrawDotDiv);
-			$($.CurrentUserSettings.DrawDotDiv).empty();
-		}*/
-		alert("Unloading Xs for goal:" + goalNum);
-		
-		if ($["Goal"+goalNum].DayDate.length > 0)
+		}		
+		else if ($["Goal"+goalNum].DayDate.length > 0)
 			{
 				for (var i = 0; i < $["Goal"+goalNum].DayDate.length; i++)
 				 {
-				 alert("Goal1 length:" + $.Goal1.DayDate.length + " Date" + $.Goal1.DayDate[i]);
 				  if($["Goal"+goalNum].DayDate[i] !== null)
 					{	  
 					  var DayObj = $(document).find("[data-date='" + $["Goal"+goalNum].DayDate[i] + "']");
 					  if(DayObj.attr('data-date') !== undefined)
 					  {
-						  var DayDOM = DayObj.find("goal"+goalNum+"dot")[0];
-						  alert('Emptying goal dot:'+goalNum+DayDOM);
+					  	  $(DayObj).find("#goal"+goalNum+"dot").empty();
+						  var DayDOM = DayObj.find("#goal"+goalNum+"dot")[0];
+				          drawXsvg(DayDOM,$["Goal"+goalNum].XColor);	
+					  }
+					}		  
+				 }
+			}	
+	}
+	
+function unloadXs(goalNum)
+	{		
+		if ($["Goal"+goalNum].DayDate.length > 0)
+			{
+				for (var i = 0; i < $["Goal"+goalNum].DayDate.length; i++)
+				 {
+				  if($["Goal"+goalNum].DayDate[i] !== null)
+					{	  
+					  var DayObj = $(document).find("[data-date='" + $["Goal"+goalNum].DayDate[i] + "']");
+					  if(DayObj.attr('data-date') !== undefined)
+					  {
+						  var DayDOM = DayObj.find("#goal"+goalNum+"dot")[0];
 				          $(DayObj).find("#goal"+goalNum+"dot").empty();
 						  unDrawXsvg(DayDOM, $["Goal"+goalNum].XColor);
 					  }
 					}		  
 				 }
 			}	
-		//if = all	
 	}
 	
-function changeClassGoalDiv(clickedObj)
-	{		
-
-		//alert($(clickedObj).attr('id'));
-		
-		//var updatedDescription  = document.getElementById(divID).innerHTML;
-		
-		//alert(updatedDescription);
-		
-		//change the class of the selected Goal Div to 'goalDescSelected'
-		$(this).attr('class', 'goalDescSelected');
-		
-		//revert other goalDesc divs to the normal 'goalDesc' class
-		switch ($(clickedObj).attr('id')) {
-			case ('goal1legend'): $(document).find('#goal2legend').attr('class','goalDesc');
-				break;
-			case ('goal2legend'): ;			
-				break;
-			case ('goal3'): ;
-				break;
-			case ('goal4'): ;
-				break;
-			case ('goal5'): ;
-				break;
-			case ('goal6'): ;
-				break;
-			case ('goal7'): ;
-				break;
-			case ('goal8'): ;
-				break;
-			case ('goal9'): ;
-				break;
-			case ('goal10'): ;
-				break;
-			default: ;
-		}
-				
-	}
-	
-//Build Legend
-function legendBuild() {
-	if($.Goal1.Description !== 'Goal 1' && $.Goal1.DayDate.length !== 0) 
-		return;
-	}
-	
-//Handle "Add Goal" button on Legend
+//Handle the "Add Goal" button on Legend
 function legendAddGoal_btnHandler() 
 	{
 			//find next goal
-		    legendFindNextGoal();
-			alert('Next Goal:' + $.CurrentUserSettings.NextGoal);
+		    var nextGoal = legendFindNextGoal();
+		    if(nextGoal == 9)
+			{
+				alert("Sorry, you may only have 8 active goals at one time.");
+				return;
+			}
 			
 			//Activate the next goal
-			$["Goal"+$.CurrentUserSettings.NextGoal].Active = 1
-			console.log($["Goal1"].Active);		
+			$["Goal"+nextGoal].Active = 1
+			
+			//add the new goal to the array used to persist the goal ordering across logins, then update the DB with new settings
+			$.CurrentUserSettings.goalsSortOrder.push(nextGoal);
+			updateDB_CurrentSettings();
 				
 			//call function to add next goal html to the legend
-			legendAddGoal($.CurrentUserSettings.NextGoal);
+			legendAddGoal(nextGoal);
 						
 			//dynamically update the HTML just added with goal info stored in DB
 			updateLegendHTML();
 			
 			//update the databases
-			updateDB_Goal('goal' + $.CurrentUserSettings.NextGoal);
+			updateDB_Goal(nextGoal);
 			
 		    //Apply markup to the dynamically added button
-			$('#btnDropGoal' + $.CurrentUserSettings.NextGoal).buttonMarkup();
-			$('#btnClearGoal' + $.CurrentUserSettings.NextGoal).buttonMarkup();
-			$('#btnEditGoal' + $.CurrentUserSettings.NextGoal).buttonMarkup();
-			
-			//increment Next Goal
-			$.CurrentUserSettings.NextGoal = $.CurrentUserSettings.NextGoal + 1;
+			$('#btnDropGoal' + nextGoal).buttonMarkup();
+			$('#btnClearGoal' + nextGoal).buttonMarkup();
+			$('#btnEditGoal' + nextGoal).buttonMarkup();
 			
 			//hide then show the legend to fix the bug of the newly added goal divs not showing
 			$('#legend').toggle();
 			$('#legend').toggle();
+			
+			//set the just added goal as the current goal
+			setGoal(nextGoal);
 			
 	}
 function legendAddGoal(goalNum)
@@ -537,30 +370,21 @@ function legendAddGoal(goalNum)
 	
 function legendAddGoals_OnStartup() 
 	{
-		for(var i=1;i<11;i++)
-		{
-			if ($["Goal"+i].Active === 1)
-			{
-				legendAddGoal(i);
-				//console.log("Adding goal:" + "Goal" + i);
-			}
-		}
+		//iterate over the goalsSortOrder array and for each goal found, add it to the legend in sequential order
+		for(var i=0;i<$.CurrentUserSettings.goalsSortOrder.length;i++)
+			legendAddGoal($.CurrentUserSettings.goalsSortOrder[i]);
+		
+		//set current goal to the first active goal found
+		setGoal(legendFindActiveGoal());
 	}
 
 //function to update goal information entered into the update goals dialog		
 function updateGoalInfo(goalNum)
-	{		
-		//For testing:
-		//alert(goalNum);
-		//alert(updatedDescription);
-		
+	{				
 		//reload Xs for selected goal if color changed
 	 	if($["Goal"+goalNum].XColor !== document.forms["frmGoals"]["XColor"].value)
  			{
- 				alert("Color changed, redrawing");
  				$["Goal"+goalNum].XColor = document.forms["frmGoals"]["XColor"].value;
- 				//empty the divs of the Xs that are drawn, so that they can be redrawn (for color changes)
-				$("[id=" + goalNum + "dot]").empty();	
  				loadXs(goalNum);					 				
  			}
  			
@@ -576,11 +400,7 @@ function updateGoalInfo(goalNum)
 		updateLegendHTML();		
 		
 		//set the goal to the currently updated goal
-		setGoal(goalNum);		
-		
-		//test
-		//alert('Current Goal Updated:' + goalNum + '      Color:' + document.forms["frmGoals"]["XColor"].value);
-			
+		setGoal(goalNum);				
 	}
 	
 
@@ -594,44 +414,6 @@ function updateLegendHTML()
 			for(var i=1;i<11;i++)
 				$('#legendDotGoal'+i).css("background",$["Goal"+i].XColor);
 	}	
-			
-//Not Active, delete if not used
-function legendRecalcSortOrder() 
-	{
-		If($.CurrentUserSettings.SelectedGoal === 1)
-			{
-				$.Goal1.SortOrder = 10;
-				$.Goal2.SortOrder -= 1;
-				$.Goal3.SortOrder -= 1;
-				$.Goal4.SortOrder -= 1;
-				$.Goal5.SortOrder -= 1;
-				$.Goal6.SortOrder -= 1;
-				$.Goal7.SortOrder -= 1;
-				$.Goal8.SortOrder -= 1;
-				$.Goal9.SortOrder -= 1;
-				$.Goal10.SortOrder -= 1;
-			}
-		If($.CurrentUserSettings.SelectedGoal === 2)
-			$.Goal2.SortOrder = $.Goal2.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 3)
-			$.Goal3.SortOrder = $.Goal3.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 4)
-			$.Goal4.SortOrder = $.Goal4.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 5)
-			$.Goal5.SortOrder = $.Goal5.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 6)
-			$.Goal6.SortOrder = $.Goal6.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 7)
-			$.Goal7.SortOrder = $.Goal7.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 8)
-			$.Goal8.SortOrder = $.Goal8.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 9)
-			$.Goal9.SortOrder = $.Goal9.SortOrder + 10;	
-		If($.CurrentUserSettings.SelectedGoal === 10)
-			$.Goal10.SortOrder = $.Goal10.SortOrder + 10;
-		//update the databases
-		updateDB_Goal($.CurrentUserSettings.SelectedGoal)												
-	}
 	
 function legendFindNextGoal() 
 	{
@@ -639,7 +421,18 @@ function legendFindNextGoal()
 		{
 			if($["Goal"+i].Active === 0) 
 			{
-				$.CurrentUserSettings.NextGoal = i;
+				return i;
+			}
+		} 
+	}
+	
+function legendFindActiveGoal() 
+	{
+		for(var i=1;i<11;i++)
+		{
+			if($["Goal"+i].Active === 1) 
+			{
+				return i;
 			}
 		} 
 	}
@@ -652,23 +445,26 @@ function legendRemoveGoal()
 			//reset goal object to default settings
 			$("#legendLine"+$.CurrentUserSettings.SelectedGoal).empty().remove();
 			$["Goal"+$.CurrentUserSettings.SelectedGoal].Active = 0;
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].SortOrder = $.Goal1.SortOrder + 10;	
+			//$["Goal"+$.CurrentUserSettings.SelectedGoal].SortOrder = $["Goal"+$.CurrentUserSettings.SelectedGoal].SortOrder + 10;	
 			$["Goal"+$.CurrentUserSettings.SelectedGoal].Description = 'Goal';
 			$["Goal"+$.CurrentUserSettings.SelectedGoal].Notes = '';
 			$["Goal"+$.CurrentUserSettings.SelectedGoal].XGoal = '30';
 			$["Goal"+$.CurrentUserSettings.SelectedGoal].DayDate = [];	
 			$["Goal"+$.CurrentUserSettings.SelectedGoal].XColor = $.CurrentUserSettings.defaultGoalColor[$.CurrentUserSettings.SelectedGoal];	
 
-			//update DB
+			//update goal object in DB
 			updateDB_Goal($.CurrentUserSettings.SelectedGoal);	
 			
-			//reset current goal to first active goal
-			$.CurrentUserSettings.SelectedGoal == 1	
+			//remove the goal from the goalsSortOrder array used to persist ordering across logins, then update DB with new settings
+			$.CurrentUserSettings.goalsSortOrder.splice($.CurrentUserSettings.goalsSortOrder.indexOf($.CurrentUserSettings.SelectedGoal),1);
+			updateDB_CurrentSettings();
+			
+			//reset current goal to first active goal found)
+			setGoal(legendFindActiveGoal());
 	}
 
 function setGoal(goalNum)
 {
-		//alert('Setting Goal:' + goalNum);
 		//revert all classes to normal:  'goalDesc'
 		for(var i=1;i<11;i++)
 			$(document).find('#goal'+i).attr('class', 'goalDesc');
@@ -699,10 +495,8 @@ function drawX(clickedDayDiv)
 	var DrawDotDivDOM =  $(clickedDayDiv).find($.CurrentUserSettings.DrawDotDiv)[0];
 	var DayDBLocation = checkDay(ClickedDate);
 	//console.log("Drawing Date:" + ClickedDate);
-	//alert("Drawing X, current selected goal:" + $.CurrentUserSettings.SelectedGoal);
 	if (DayDBLocation < 0)
 		{
-			//alert('Day not already used, drawing X');
 			//insert day into DB
 			//alert('Calling insertDay() with currentl selected goal:' + $.CurrentUserSettings.SelectedGoal);
 			insertDay(ClickedDate);
@@ -719,8 +513,6 @@ function drawX(clickedDayDiv)
 			   
 		} else 
 			{
-				//alert('Day already used, erasing X');
-				
 				//remove day from DB
 				removeDay(ClickedDate, DayDBLocation);
 				
@@ -756,9 +548,6 @@ function validateGoalsForm()
 		  	updateGoalInfo();
 	  }
 	}
-	
-	
-	
 	
 	
 ///////////////////
@@ -827,7 +616,6 @@ function validateGoalsForm()
 			} else {
 						monthLength = calDaysInMonth[(month - 1)];
 			}
-			//alert('Month Length:' + monthLength);
 			return monthLength;
 		}
 		
@@ -844,19 +632,4 @@ function validateGoalsForm()
 		document.forms["frmGoals"]["goalNote"].value = $["Goal"+goalNum].Notes;
 		document.forms["frmGoals"]["goalX"].value = $["Goal"+goalNum].XGoal;
 		$("#XColor").spectrum("set", $["Goal"+goalNum].XColor);
-	}
-
-	//Sort goals
-	function sortGoals()
-	{
-		var goalsSorted = [];
-		for (var i=1;i<11;i++)
-		{
-			var propertyName = "Goal" + i;
-			goalsSorted[i-0] = $[propertyName].SortOrder;
-		}				
-		goalsSorted.sort(function(a,b){return a-b});
-		console.log(goalsSorted);
-		
-		return 1;
 	}
