@@ -1,0 +1,951 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+        
+        
+        <link href="css/jquery.mobile-1.2.0.css" rel="stylesheet" type="text/css"/>
+		<!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile.simpledialog.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/spectrum.css">
+        
+         <style type="text/css">
+		  .ui-overlay-a {background:#B6CAFE!important}
+		  .ui-btn{margin:0 0;}
+		  
+		  .ui-btn-hover-b{
+				border: 1px solid #111;
+				background: #333;
+				font-weight: bold;
+				color: #FFFFFF;
+				text-shadow: 0 1px 1px black;
+				background-image: -webkit-gradient(linear,left top,left bottom,from(#0484A5),to(#024D43));
+				background-image: -webkit-linear-gradient( #0484A5,#024D43 );
+				background-image: -moz-linear-gradient( #0484A5,#024D43 );
+				background-image: -ms-linear-gradient( #0484A5,#024D43 );
+				background-image: -o-linear-gradient( #0484A5,#024D43 );
+				background-image: linear-gradient( #0484A5,#024D43 );
+			}
+		</style>
+		
+        <script src="js/modernizr.custom.2.5.3.js"></script>
+        <script type="text/javascript">
+/*            alert('Loading yepnope');
+			yepnope([
+            {
+              test: Modernizr.svg,
+              yep :   ['js/raphael-min.js', 'js/DBTC-lib-drawsvg.js'],
+              nope:  ['js/canvg.js','js/rgbcolor.js','js/DBTC-lib-drawcanvas.js']
+            }
+            ]);*/
+        </script>
+
+		<title></title>
+	</head>
+    
+	<body>
+
+		<div id="clouds" data-role = "page">
+			<div class="cloud x3"></div>	<div class="cloud x4"></div>  <div class="cloud x5"></div>
+			
+			<object type="image/svg+xml" class="backgroundImage"  width="100%"  data="svg/background4.svg"><span/></object>
+
+		  <div id="mainContainer" class="screen">	
+<!---------------------BEGIN LOGIN PAGE-------------------------------------------------------------------->  
+<!--------------------------------------------------------------------------------------------------------->
+          	 <div id="loginPage"> 
+				<!--<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>-->
+          		<div id="loginHeader" data-role="header">
+          			Welcome
+          		</div>
+          		<div data-role="content" data-theme="a" style="padding:15px;" data-corners="true" role="main">
+				 	<form name="frmLogin">
+				          <div data-role="fieldcontain" class="login-form-line">
+					          <div class="login-label">User Name:&nbsp;</div>
+					          <div class="login-input"> <input type="text" name="loginName" id="loginName" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div> 
+			              </div>	              
+			              <div data-role="fieldcontain" class="login-form-line">
+					          <div class="login-label">&nbsp;&nbsp;Password:</div>
+					          <div class="login-input"> <input type="text" name="loginPassword" id="loginPassword" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div> 
+			              </div>
+			              <div data-role="fieldcontain"  id="login-group-rememberMe">
+						 	<fieldset data-role="controlgroup">
+								<input type="checkbox" name="rememberMe" id="rememberMe" class="custom" />
+								<center><label for="rememberMe">Remember Me</label></center>
+						    </fieldset>
+							</div>
+			       	 </form>
+			       <!--buttons-->
+			       <a href="#" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" onClick="transitionToCalendar();">Login</a>
+				   <a href="#forgotPassword" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Forgot Your Password?</a>   
+				   <a href="#registerAccount" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Create A New Account</a>
+				   <hr>
+				   <div id="loginOr">-- OR -- </div>
+				  <a href="#loginGuest" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Skip  Logging  In</a> 
+				 </div>
+           </div>
+<!---------------------END LOGIN PAGE------------------------------------------------------------------>  
+<!----------------------------------------------------------------------------------------------------->
+<!---------------------BEGIN CALENDAR CONTAINER--------------------------------------------------------> 	
+ 	  <div id="calendarContainer">
+	<!---------------------BEGIN SMALL LEGEND-------------------------------------------------------------->         	  		  
+			 <!---Legend container hack to make the legend vertically centered-->
+        <div id="smallLegendContainer">
+        	<div id="smallLegendCenteringHack">
+        	 <!---End legend container hack-->					
+               <div id="smallLegend">
+                
+                <div class="goalDescSelected" onClick="setGoal(this);" id="goal1">
+                    <div class="goalDot blue"></div>
+                    <div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal1"><p>Goal 1</p></div>
+                </div>
+                                                   
+                <div class="goalDesc" onClick="setGoal(this);" id="goal2">
+                    <div class="goalDot yellow"></div>
+                    <div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal2"><p>Goal 2</p></div>
+                </div>
+                
+                 <div class="goalDesc" onClick="setGoal(this);" id="goal3">
+                    <div class="goalDot green"></div><div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal3"><p>Goal 3</p></div>
+             		</div>
+                    
+                  <div class="goalDesc" onClick="setGoal(this);" id="goal4"> 
+                    <div class="goalDot red"></div><div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal4"><p>Goal 4</p></div>
+                  </div>
+                  
+                  <div class="goalDesc" onClick="setGoal(this);" id="goal5">  
+                    <div class="goalDot purple" onClick="setGoal('goal5');"></div><div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal5"><p>Goal 5</p></div>
+                   </div>
+                  
+                  <div class="goalDesc" onClick="setGoal(this);" id="goal6"> 
+                    <div class="goalDot orange"></div><div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal6"><p>Goal 6</p></div>
+                   </div>
+                   
+                   <div class="goalDesc" onClick="setGoal(this);" id="goal7"> 
+                    <div class="goalDot pink"></div><div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal7"><p>Goal 7</p></div>
+             	    </div>
+                    
+                   <div class="goalDesc" onClick="setGoal(this);" id="goal8">
+                    <div class="goalDot brown"></div><div class="goalText" contenteditable="true" onKeyUp="updateGoalDesc(this.id);" id="goal8"><p>Goal 8</p></div>
+                   </div>
+         	  </div>	
+           </div>
+        
+			<img src="img/blue_arrow.gif" width="100%" onClick="hideLegend()">
+		</div>
+	<!---------------------END SMALL LEGEND---------------------------------------------------------------->   	  	
+	<!---------------------BEGIN CALENDAR------------------------------------------------------------------>    
+		     <div id="calendar">
+		     <a href="#" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="top: -3.3%;position: absolute;left: 96.6%;z-index: 101;margin:2%" onClick="transitionToLogin()">Close</a>
+
+          	  <div class="calHeader">
+          	  <div class="previousMonth" onclick="buildMonth('prev');">
+              <img src="img/comic_arrow-left.png" id="backArrow" class="headerImg">
+              <!--<span id="foo" onclick="buildMonth('prev');">
+              	<object type="image/svg+xml" 
+              	id="prevArrow"
+			    class="headerImg"
+			    onclick="buildMonth('prev');"
+			    data="svg/comic_arrow-left.svg">
+			    <span/></object></span> -->
+              <p style="line-height:.5; pointer-events: none;">PREV</p>
+                
+              </div>
+              
+			  <div class="calTitle" id="calTitle">
+					<h2></h2>
+			  </div>
+             <!--Deprecated: use if loading month images instead of dynamic text
+              <div class="calTitle" id="calTitleImage">              </div>
+			 -->                
+               <div class="nextMonth"  onclick="buildMonth('next');">
+                <p style="line-height:.5;pointer-events: none;">NEXT</p>
+                <img src="img/comic_arrow-right.png" id="forwardArrow" class="headerImg">
+                
+               </div>
+               </div>
+               	
+				<div id="daysweek">
+                	<div class="dayweek"><p>Su</p></div>
+					<div class="dayweek"><p>Mo</p></div>
+					<div class="dayweek"><p>Tu</p></div>
+					<div class="dayweek"><p>We</p></div>
+					<div class="dayweek"><p>Th</p></div>
+					<div class="dayweek"><p>Fr</p></div>
+					<div class="dayweek brn"><p>Sa</p></div>
+				</div>
+                
+				<div id="daysmonth">
+<!---------------------------------------- week 1 ---------------------------------------->
+					<div class="week">
+						<div class="day" id="calRow1Col1">
+								<div class="daybar" id="daybar">
+                            		<p>31</p>
+                                </div>	
+                            	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>
+						</div>		
+						<div class="day"  id="calRow1Col2">
+							<div class="daybar" id="daybar"><p>1</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>   		
+						<div class="day" id="calRow1Col3">
+							<div class="daybar" id="daybar"><p>2</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>		
+						<div class="day"  id="calRow1Col4">
+							<div class="daybar" id="daybar"><p>3</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>
+						<div class="day" id="calRow1Col5">
+							<div class="daybar" id="daybar"><p>4</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>	
+						<div class="day" id="calRow1Col6">
+							<div class="daybar" id="daybar"><p>5</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>		
+						<div class="daybrn" id="calRow1Col7">
+							<div class="daybar" id="daybar"><p>6</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>	
+					</div>	
+<!---------------------------------------- week 2 ---------------------------------------->
+					<div class="week">
+						<div class="day" id="calRow2Col1">
+								<div class="daybar" id="daybar">
+                            		<p>31</p>
+                                </div>	
+                            	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>
+						</div>		
+						<div class="day"  id="calRow2Col2">
+							<div class="daybar" id="daybar"><p>1</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>   		
+						<div class="day" id="calRow2Col3">
+							<div class="daybar" id="daybar"><p>2</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>		
+						<div class="day"  id="calRow2Col4">
+							<div class="daybar" id="daybar"><p>3</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>
+						<div class="day" id="calRow2Col5">
+							<div class="daybar" id="daybar"><p>4</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>	
+						<div class="day" id="calRow2Col6">
+							<div class="daybar" id="daybar"><p>5</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>		
+						<div class="daybrn" id="calRow2Col7">
+							<div class="daybar" id="daybar"><p>6</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>	
+					</div>	
+<!---------------------------------------- week 3 ---------------------------------------->
+					<div class="week">
+						<div class="day" id="calRow3Col1">
+								<div class="daybar" id="daybar">
+                            		<p>31</p>
+                                </div>	
+                            	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>
+						</div>		
+						<div class="day"  id="calRow3Col2">
+							<div class="daybar" id="daybar"><p>1</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>   		
+						<div class="day" id="calRow3Col3">
+							<div class="daybar" id="daybar"><p>2</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>		
+						<div class="day"  id="calRow3Col4">
+							<div class="daybar" id="daybar"><p>3</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>
+						<div class="day" id="calRow3Col5">
+							<div class="daybar" id="daybar"><p>4</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>	
+						<div class="day" id="calRow3Col6">
+							<div class="daybar" id="daybar"><p>5</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>		
+						<div class="daybrn" id="calRow3Col7">
+							<div class="daybar" id="daybar"><p>6</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>	
+					</div>	
+<!---------------------------------------- week 4 ---------------------------------------->
+				<div class="week">
+						<div class="day" id="calRow4Col1">
+								<div class="daybar" id="daybar">
+                            		<p>31</p>
+                                </div>	
+                            	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>
+						</div>		
+						<div class="day"  id="calRow4Col2">
+							<div class="daybar" id="daybar"><p>1</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>   		
+						<div class="day" id="calRow4Col3">
+							<div class="daybar" id="daybar"><p>2</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>		
+						<div class="day"  id="calRow4Col4">
+							<div class="daybar" id="daybar"><p>3</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>
+						<div class="day" id="calRow4Col5">
+							<div class="daybar" id="daybar"><p>4</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>	
+						<div class="day" id="calRow4Col6">
+							<div class="daybar" id="daybar"><p>5</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>		
+						<div class="daybrn" id="calRow4Col7">
+							<div class="daybar" id="daybar"><p>6</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>	
+					</div>	
+<!---------------------------------------- week 5 ---------------------------------------->
+					<div class="week">
+						<div class="day" id="calRow5Col1">
+								<div class="daybar" id="daybar">
+                            		<p>31</p>
+                                </div>	
+                            	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>
+						</div>		
+						<div class="day"  id="calRow5Col2">
+							<div class="daybar" id="daybar"><p>1</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>   		
+						<div class="day" id="calRow5Col3">
+							<div class="daybar" id="daybar"><p>2</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>		
+						<div class="day"  id="calRow5Col4">
+							<div class="daybar" id="daybar"><p>3</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>
+						<div class="day" id="calRow5Col5">
+							<div class="daybar" id="daybar"><p>4</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>	
+						<div class="day" id="calRow5Col6">
+							<div class="daybar" id="daybar"><p>5</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>		
+						<div class="daybrn" id="calRow5Col7">
+							<div class="daybar" id="daybar"><p>6</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>	
+					</div>	
+<!---------------------------------------- week 6 ---------------------------------------->
+					<div class="week">
+						<div class="day" id="calRow6Col1">
+								<div class="daybar" id="daybar">
+                            		<p>31</p>
+                                </div>	
+                            	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>
+						</div>		
+						<div class="day"  id="calRow6Col2">
+							<div class="daybar" id="daybar"><p>1</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>   		
+						<div class="day" id="calRow6Col3">
+							<div class="daybar" id="daybar"><p>2</p></div>	
+                            	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>		
+						<div class="day"  id="calRow6Col4">
+							<div class="daybar" id="daybar"><p>3</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>
+						<div class="day" id="calRow6Col5">
+							<div class="daybar" id="daybar"><p>4</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>	
+						</div>	
+						<div class="day" id="calRow6Col6">
+							<div class="daybar" id="daybar"><p>5</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>		
+						<div class="daybrn" id="calRow6Col7">
+							<div class="daybar" id="daybar"><p>6</p></div>	
+                            		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
+                                    <div class="goaldot" id="goal1dot"></div>	
+                                    <div class="goaldot" id="goal2dot"></div>
+                                    <div class="goaldot" id="goal3dot"></div>
+                                    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>
+                                    <div class="goaldot" id="goal6dot"></div>
+                                    <div class="goaldot" id="goal7dot"></div>
+                                    <div class="goaldot" id="goal8dot"></div>
+                                </div>		
+						</div>	
+					</div>	
+<!---------------------------------------- week 6 end ---------------------------------------->
+				</div>				
+		</div>
+    </div>
+ <!---------------------END CALENDAR CONTAINER---------------------------------------------------------->  
+ <!----------------------------------------------------------------------------------------------------->
+ <!---------------------BEGIN LEGEND  ------------------------------------------------------------------> 
+     <!---Legend container hack to make the legend vertically centered-->
+     <div id="legendContainer" class="legendContainer">
+       <!--- <div style="#position: absolute; #top: 50%;display: table-cell;margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:middle;height:inherit;">
+        End legend container hack--> 						
+              <div class="legend" id="legend" style="position:relative">
+                    <!----"X" Close button ----->
+                   <div data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" 		data-iconshadow="true" data-wrapperels="span" style="margin:2%; z-index:10000; right:-96%; top:-15px;" title="Close"  onClick="hideLegend()"><span class="ui-btn-inner ui-btn-corner-all" style="z-index:10000"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow" style="z-index:10000">&nbsp;</span></span>
+                   </div>
+                    <!----Title ----->        
+                   <div style="padding:1px 0 0 0;
+                        text-align:center;
+                        width:89%;
+                        display:inline-block;
+                        font-size:21px;color:#FFF;
+                       text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+                             -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+                             -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+                             0 0 0.5em #006, 0 0 0.5em #006,
+                             0 0 0.5em #006, 0 0 0.5em #006;"><b>Current Goals</b>
+                   </div>
+             </div>	
+         
+             <!---"Add Goals" button at bottom of legend --->
+             <div id="btnAddGoals" data-rel="dialog" data-role="button" data-transition="flow" data-inline="true" data-corners="true" data-shadow="true" data-iconshadow="true" data-theme="b" onClick="legendAddGoal_btnHandler()">&nbsp &nbsp Add a Goal! &nbsp &nbsp</div>
+			 </div>
+
+ 			 <!---Popup dialog to confirm drop goal -- Must be at bottom of legend div -->
+             <div data-role="popup" id="popupDropGoal" data-theme="a" data-overlay-theme="a" style="max-width:300px; border: 2px solid #444;" data-shadow="true" data-corners="true" data-transition="pop">
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+					<div data-role="content" data-theme="a" style="padding:15px;" data-corners="true" role="main">
+						<p style="color:white;"> Are you sure you wish to delete this goal?  <br><br>This cannot be undone.</p><br>
+						&nbsp;<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="width:100px;" onClick="legendRemoveGoal()">Yes</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp    
+						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="width:100px;">Cancel</a>    
+					</div>
+			 </div>       
+      		 <!---Popup dialog to confirm clear goal -- Must be at bottom of legend div -->
+     		 <div data-role="popup" id="popupClearGoal" data-theme="a" data-overlay-theme="a" style="max-width:300px; border: 2px solid #444;" data-shadow="true" data-corners="true" data-transition="pop">
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+					<div data-role="content" data-theme="a" style="padding:15px;" data-corners="true" role="main">
+						<p style="color:white;"> Are you sure you wish to delete this goal?  <br><br>This cannot be undone.</p><br>
+						&nbsp;<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="width:100px;" onClick="clearGoal($.CurrentUserSettings.SelectedGoal)">Yes</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp    
+						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="width:100px;">Cancel</a>    	
+					</div>
+	 		</div>
+	 		<!---Popup dialog to edit goal settings-- Must be at bottom of legend div -->
+            <div data-role="popup" id="popupUpdateGoals" data-theme="a" data-overlay-theme="a" style="max-width:300px; border:2px solid #444;"  data-transition="pop" data-shadow="true" data-corners="true">
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+					<!-- <div style="padding:3px 0 4px 0;
+		       				text-align:center;
+		                    width:93%;
+		                    display:inline-block;
+		       				font-size:19px;color:#FFF;
+		                   text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+		                         -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+		                         -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+		                         0 0 0.3em #006, 0 0 0.2em #006,
+		                         0 0 0.3em #006, 0 0 0.3em #006;"><b>Update Your Goals</b></div>   -->
+		                 
+		         <!-- <div style="padding:0 5px 4px 5px;">   -->
+					<div data-role="content" data-theme="a" style="padding:15px;" data-corners="true" role="main">
+				 	<form name="frmGoals">
+			              
+			              <!--Name-->
+				          <div data-role="fieldcontain" style="margin:0px 0 9px 0; width:380px">
+							  <!--<div class="update-goals-label-left"><font style="color:#00ffff;">GOAL</font></div> -->
+					          <div class="update-goals-label-n">Name:&nbsp;</div>
+					          <div class="update-goals-input-n"> <input type="text" name="goalName" id="gname" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%" maxlength="20" size="20"></div> 
+			              </div>
+		                 
+		                 <!--Note-->
+				          <div data-role="fieldcontain" style="margin:0px 0 9px 0; width:380px">
+							  <!--<div class="update-goals-label-left"><font style="color:#00ffff;">GOAL</font></div> -->
+					          <div class="update-goals-label-n">Notes:&nbsp;</div>
+					          <div class="update-goals-input-n"> <textarea name="goalNote" id="gnote" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%; height:110px!important;" maxlength="100" size="999"></textarea></div> 
+			              </div>
+			              
+		                 <!--X-goal field -->      
+						 <div data-role="fieldcontain" style="margin:1px 0 9px 0; width:380px">
+			                  <div class="update-goals-label-n">X Goal:&nbsp;</div>
+					          <div class="update-goals-input-x"><input type="number" name="goalX" id="gx" value="" placeholder="30" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" min="1" max="9999"></div>
+						 </div>
+						 
+						 <!--Color Picker -->      
+						 <div data-role="fieldcontain" style="margin:1px 0 9px 0; width:380px">
+			                  <div class="update-goals-label-n">Color:&nbsp;</div>
+					          <div class="update-goals-input-x"><input type="color" id="XColor" name="XColor" value="#3355cc"></div>
+						 </div>
+						 
+                  		 <!--buttons-->
+                  	      &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="width:100px;" onClick="updateGoalInfo($.CurrentUserSettings.SelectedGoal)">Update</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp    
+						  <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="width:100px;">Cancel</a>    
+					
+					</form>
+					</div>
+		          </div>
+		        </div>
+		        
+		     </div>
+		</div>
+</div>
+ <!---------------------END LEGEND ----------------------------------------------------------------------->  
+ <!------------------------------------------------------------------------------------------------------->  
+ <!------------------------------------------------------------------------------------------------------->
+  
+
+
+	
+
+  <!-- JavaScript at the bottom for fast page loading -->
+      <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary 
+    	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script> -->
+    
+      <!-- scripts concatenated and minified via ant build script-->
+			<script src="js/canvg.js"></script>
+    		<script src="js/rgbcolor.js"></script>
+			<script src="js/DBTC-lib-drawcanvas.js"></script>
+			<script src="js/raphael-min.js"></script>
+			<script src="js/DBTC-lib-drawsvg.js"></script>
+			<script src="js/jquery-1.8.2.js"></script>
+			<script src="js/spectrum.js"></script>
+            <script src="js/DBTC-lib-db.js"></script>
+
+            <script src="js/DBTC-lib-globals.js"></script>
+            <script src="js/phonegap-1.7.0.js"></script>
+            <script src="js/jquery.mobile-1.2.0.js"></script>
+
+            
+       <!--<script src="js/jquery.mobile.simpledialog2.min.js"></script> -->
+       <!-- <script src="js/jQueryRotateCompressed.2.2.js"></script> -->
+       <!-- <script src="js/lostorage.min.js"></script> -->
+            
+            <!--includes below used for testing canvas on browser
+            <script src="canvg.js"></script>
+            <script src="rgbcolor.js"></script>
+            <script src="DBTC-lib-drawcanvas.js"></script>
+            <script src="DBTC-lib-drawsvg.js"></script>-->
+      <!-- end scripts-->
+      
+      
+      <!--Test scripts that haven't been moved to their own js libraries yet-->    
+		        
+   		<script type="text/javascript">
+   			//animate transition from login to calendar
+   			function transitionToCalendar()
+   			{
+   				document.getElementById('calendarContainer').className = 'transitionIn';
+   				document.getElementById('loginPage').className = 'transitionOut';
+   			}
+   			function transitionToLogin()
+   			{
+   				document.getElementById('calendarContainer').className = 'transitionOut';
+   				document.getElementById('loginPage').className = 'transitionIn';
+   			}
+   			
+   			function launchLoginPage()
+   			{
+   				$("#lnkLoginPage").click();
+   				//$('#popupLogin').popup();
+				//$('#popupLogin').popup("open");
+   			}	
+		   //test js
+
+			function hideLegend() {
+				//alert('Hiding...');
+				$('#legendContainer').toggle();
+			}
+			function showLegend() {
+				alert('Showing...');
+				$('#legendContainer').show("fast");
+			}
+		</script>
+	   
+      <!-- End test scripts-->
+    
+      <!-- Debugger - remove for production -->
+      <!-- <script src="https://getfirebug.com/firebug-lite.js"></script> -->
+    
+      <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
+           mathiasbynens.be/notes/async-analytics-snippet 
+      <script>
+        var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+        g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
+        s.parentNode.insertBefore(g,s)}(document,"script"));
+      </script>
+		-->
+	</body>
+    
+</html>

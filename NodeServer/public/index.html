@@ -1,0 +1,68 @@
+<html>
+<head>
+<script src="js/socket.io.js"></script>
+<script src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+//jQuery(document).ready(function () {
+	//send goal updates to server
+	var server_send_goal_update = function  (JSONgoal) {
+		socket.emit('goal_update_server', {goal: 'Goal1'});
+		alert('JSON goal update sent to server' + JSONgoal);				
+	};
+	
+	//process goal updates from server
+	var server_receive_goal_update = function (JSONgoal) {
+		alert('Goal update received for Goal: ' + JSONgoal)
+		var li = jQuery('<li />').text(JSONgoal);
+		$('#goalLog').append(li);
+	};
+
+	var socket = io.connect('http://192.168.2.6:80');
+	
+	//Log connection status
+    socket.on('error', function (reason){
+        console.error('Unable to connect Socket.IO', reason);
+    });
+    socket.on('connect', function (){
+        console.info('successfully established a working and authorized connection');
+    });
+    
+    //Receive goal updates from server
+	socket.on('goal_update_client', function  (data) {
+		server_receive_goal_update(data.goal);
+	});
+//});
+</script>
+
+<style type="text/css" media="screen">
+	div#chatroom {
+		display: block;
+		height: 300px;
+		border: 1px solid #999;
+		overflow: auto;
+		width: 100%;
+		margin-bottom: 10px;
+		position: relative;
+	}
+
+	ul#chat_log {
+		list-style: none;
+		position: absolute;
+		bottom: 0px;
+	}
+
+	input#chat_box {
+		width: 99%;
+	}
+</style>
+</head>
+<body>
+
+	<div id="log">
+		<ul id="goalLog">
+		</ul>
+	</div>
+	<br>
+<input type="button" onclick="server_send_goal_update('goal1')">
+</body>
+</html>

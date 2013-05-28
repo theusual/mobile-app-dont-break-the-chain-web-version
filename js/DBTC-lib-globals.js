@@ -2,47 +2,32 @@
  $(document).bind("mobileinit", function()  //bind mobileinit event handler to the document, executes as soon as jquerymobile starts
 	{			
 
-			//Set global DB settings
-				$.localStorage = window.localStorage;
+			//Set global DB settings namespace
+			$.localStorage = window.localStorage;
 					
 			//Set current App settings
-				$.AppSettings = 
-					{
-						dbVersion: '.64',
-						testing: 'false'
-					};	
+			$.AppSettings = 
+				{
+					dbVersion: '.68',
+					testing: 'false'
+				};	
 			//Run tests			
-				if($.AppSettings.testing === 'true')
-					alert('Starting app...');
-					
-				if($.AppSettings.testing === 'true')
-					{
-						if(Modernizr.svg)
-							{
-								window.alert("working on SVG capable browser");
-							}else {
-								window.alert("working on browser not supporting SVG.  Converting all graphics to canvas.");
-						   }	
-					}
-			//misc settings
-				//disable the JQM loading message that is stuck at bottom of page
-				$.mobile.loadingMessage = false;
+			if($.AppSettings.testing === 'true')
+				alert('Starting app...');
+				
+			if($.AppSettings.testing === 'true')
+				{
+					if(Modernizr.svg)
+						{
+							window.alert("working on SVG capable browser");
+						}else {
+							window.alert("working on browser not supporting SVG.  Converting all graphics to canvas.");
+					   }	
+				}
+			//disable the JQM loading message that is stuck at bottom of page
+			$.mobile.loadingMessage = false;
 			//start the process of checking DB versions and creating the DB if necessary
-			    checkDBVersion();
-				
-			//update all date divs with current month dates
-				buildMonth('current');	
-				
-			//build the legend with active goals from the database
-				legendAddGoals_OnStartup() ;
-				
-			//recalc sort order 
-				
-			//update the HTML being displayed in the goal legend using goal info stored in DB and update the form values displaying in the update goals dialog form	
-				updateLegendHTML();
-			
-			//initiate the legend to highlight the current selected goal
-				setGoal($.CurrentUserSettings.SelectedGoal);
+			checkDBVersion();
 				
 });	
 
@@ -67,7 +52,35 @@ $(document).ready(function(){
 				['#00349B','#ffff96']
 			]
 		})
+		
+		//load login page on startup
+		launchLoginPage();
+		
+		//Hide legend on startup
+		$('#legendContainer').toggle();
+
+		//update all date divs with current month dates
+		buildMonth('current');	
+			
+		//build the legend with active goals from the database
+		legendAddGoals_OnStartup() ;
+
+		//update the HTML being displayed in the goal legend using goal info stored in DB and update the form values displaying in the update goals dialog form	
+		updateLegendHTML();
+		
+		//initiate the legend to highlight the current selected goal
+		setGoal($.CurrentUserSettings.SelectedGoal);
+				
+
 });	
+
+//REMOVE THIS LATER IF NOT USED, THIS IS FOR PAGEINIT EVEN WHICH LOADS ON EVERY PAGE LOAD INSTEAD OF JUST ON APP LOAD LIKE DOCUMENT READY
+$('#clouds').live( 'pageinit',function(event){
+
+});
+////////////////////
+
+
 function buildMonth(nextPrev)
 	{
 	//update all div structures in the calcontainer to reflect the user's selected month
@@ -408,11 +421,13 @@ function updateLegendHTML()
 	{
 			//update the HTML being displayed in the goal legend using goal info stored in DB
 			for(var i=1;i<11;i++)	
-				$('#goal'+i+'t').html($["Goal"+i].Description);
-				
+				$('#goal'+i+'t').html($["Goal"+i].Description);			
 			//update the colors displayed in the legend
 			for(var i=1;i<11;i++)
-				$('#legendDotGoal'+i).css("background",$["Goal"+i].XColor);
+				$('#legendDotGoal'+i).css("background",$["Goal"+i].XColor);		
+			//update the colors displayed in the small legend
+			for(var i=1;i<11;i++)
+				$('#smallLegendDotGoal'+i).css("background",$["Goal"+i].XColor);
 	}	
 	
 function legendFindNextGoal() 
@@ -633,3 +648,29 @@ function validateGoalsForm()
 		document.forms["frmGoals"]["goalX"].value = $["Goal"+goalNum].XGoal;
 		$("#XColor").spectrum("set", $["Goal"+goalNum].XColor);
 	}
+	
+	//animate transition from login to calendar
+	function transitionToCalendar()
+	{
+		document.getElementById('calendarContainer').className = 'transitionIn';
+		document.getElementById('loginPage').className = 'transitionOut';
+	}
+	function transitionToLogin()
+	{
+		document.getElementById('calendarContainer').className = 'transitionOut';
+		document.getElementById('loginPage').className = 'transitionIn';
+	}
+	
+	function launchLoginPage()
+	{
+		//handle "Remember Me"
+		if ($.CurrentUserSettings.UserObj.RememberMe == true) {
+			document.forms["frmLogin"]["userName"].value = $.CurrentUserSettings.UserObj.UserName;
+			document.forms["frmLogin"]["userPassword"].value = $.CurrentUserSettings.UserObj.UserPassword;
+			$('#rememberMe').prop("checked", true);
+		}
+		
+		$("#lnkLoginPage").click();
+		//$('#popupLogin').popup();
+		//$('#popupLogin').popup("open");
+	}	

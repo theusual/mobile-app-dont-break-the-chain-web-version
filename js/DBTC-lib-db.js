@@ -11,7 +11,7 @@ function checkDBVersion()
 		if ($.localStorage.getObject("AppSettings") === null) 
 			{
 				if($.AppSettings.testing === 'true')
-					alert('DB does not exist, building'); 
+					alert('Local DB does not exist, building'); 
 				//createDB runs at end of purge function and loadDB runs at end of createDB function, so no need to call them seperately
 				purgeDB();
 				
@@ -62,8 +62,14 @@ function createDB()
 					MaxCount: 0,	
 					defaultGoalColor: ['#FFFFFF','#06fdfd','#e50000','#f97306','#01ff07',
 									   '#c9ae74','#ff028d','#F2DA00','#9a0eea','#00349B','#ffff96'],
-					goalsSortOrder: [1,2,3]			
-					};
+					goalsSortOrder: [1,2,3],
+					UserObj: {
+							UserLogin: '',
+							UserPassword: '',
+							SessionToken: '',
+							RememberMe: false
+					}
+				};
 					
 				//Goal Tables
 				for(var i=1;i<11;i++)

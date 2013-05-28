@@ -40,27 +40,84 @@
             ]);*/
         </script>
 
-		<title>Don't Break The Chain!</title>
+		<title></title>
 	</head>
     
 	<body>
 
 		<div id="clouds" data-role = "page">
-			<div class="cloud x1"></div>
-			<div class="cloud x2"></div>
-			<div class="cloud x3"></div>
-			<div class="cloud x4"></div>
-			<div class="cloud x5"></div>
+			<div class="cloud x3"></div>	<div class="cloud x4"></div>  <div class="cloud x5"></div>
 			
-			<object type="image/svg+xml" 
-		    style="position:absolute; top:-15%;"
-		    width="100%"
-		    data="svg/background4.svg">
-		  <span/></object>
+			<object type="image/svg+xml" class="backgroundImage"  width="100%"  data="svg/background4.svg"><span/></object>
 
-		  <div id="calendar"> 
-          <!-- <a href="#" id="opendialog" data-role="button">Open Dialog</a>	-->
-		    <div id="calcontainer">
+		  <div id="mainContainer" class="screen">	
+<!---------------------BEGIN LOGIN PAGE-------------------------------------------------------------------->  
+<!--------------------------------------------------------------------------------------------------------->
+          	 <div id="loginPage"> 
+				<!--<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>-->
+          		<div id="loginHeader" data-role="header">
+          			Welcome
+          		</div>
+          		<div data-role="content" data-theme="a" style="padding:15px;" data-corners="true" role="main">
+				 	<form name="frmLogin">
+				          <div data-role="fieldcontain" class="login-form-line">
+					          <div class="login-label">User Name:&nbsp;</div>
+					          <div class="login-input"> <input type="text" name="userName" id="userName" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div> 
+			              </div>	              
+			              <div data-role="fieldcontain" class="login-form-line">
+					          <div class="login-label">&nbsp;&nbsp;Password:</div>
+					          <div class="login-input"> <input type="password" name="userPassword" id="userPassword" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div> 
+			              </div>
+			              <div data-role="fieldcontain"  id="login-group-rememberMe">
+						 	<fieldset data-role="controlgroup">
+								<input type="checkbox" name="rememberMe" id="rememberMe" class="custom" />
+								<center><label for="rememberMe">Remember Me</label></center>
+						    </fieldset>
+							</div>
+			       	 </form>
+			       <!--buttons-->
+			       <a href="#" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" onClick="login_to_server();">Login</a>
+				   <a href="#forgotPassword" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Forgot Your Password?</a>   
+				   <a href="#registerAccount" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Create A New Account</a>
+				   <hr>
+				   <div id="loginOr">-- OR -- </div>
+				  <a href="#loginGuest" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Skip Login</a> 
+				 </div>
+           </div>
+<!---------------------END LOGIN PAGE------------------------------------------------------------------>  
+<!----------------------------------------------------------------------------------------------------->
+<!---------------------BEGIN CALENDAR CONTAINER--------------------------------------------------------> 	
+ 	  <div id="calendarContainer">
+	<!---------------------BEGIN SMALL LEGEND---------------------------------------------------------->       	  		  
+			 <!---Legend container hack to make the legend vertically centered-->
+        <div id="smallLegendContainer">
+        	<div id="smallLegendCenteringHack">
+        	 <!---End legend container hack--->			
+               <div id="smallLegend">              
+                 <div class="smallLegendLine" id="smallLegendLine1">
+                	<div class="smallGoalDesc" onClick="setGoal('1');" id="smallLegendGoal1">
+                		<div class="smallGoalDot blue" id="smallLegendDotGoal1"></div>
+                	</div>                              
+         	     </div>	
+         	     <div class="smallLegendLine" id="smallLegendLine2">
+                	<div class="smallGoalDesc" onClick="setGoal('2');" id="smallLegendGoal2">
+                		<div class="smallGoalDot blue" id="smallLegendDotGoal2"></div>
+                	</div>                              
+         	     </div>	
+         	     <div class="smallLegendLine" id="smallLegendLine3">
+                	<div class="smallGoalDesc" onClick="setGoal('3');" id="smallLegendGoal3">
+                		<div class="smallGoalDot blue" id="smallLegendDotGoal3"></div>
+                	</div>                              
+         	     </div>	
+           	   </div>
+        	</div>
+			<img src="img/blue_arrow.gif" width="75%" onClick="hideLegend()">
+		</div>
+	<!---------------------END SMALL LEGEND---------------------------------------------------------------->   	  	
+	<!---------------------BEGIN CALENDAR------------------------------------------------------------------>    
+		     <div id="calendar">
+		     <a href="#" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="top: -3.3%;position: absolute;left: 96.6%;z-index: 101;margin:2%" onClick="transitionToLogin()">Close</a>
+
           	  <div class="calHeader">
           	  <div class="previousMonth" onclick="buildMonth('prev');">
               <img src="img/comic_arrow-left.png" id="backArrow" class="headerImg">
@@ -71,7 +128,7 @@
 			    onclick="buildMonth('prev');"
 			    data="svg/comic_arrow-left.svg">
 			    <span/></object></span> -->
-              <p style="line-height:.5">PREV</p>
+              <p style="line-height:.5; pointer-events: none;">PREV</p>
                 
               </div>
               
@@ -82,7 +139,7 @@
               <div class="calTitle" id="calTitleImage">              </div>
 			 -->                
                <div class="nextMonth"  onclick="buildMonth('next');">
-                <p style="line-height:.5">NEXT</p>
+                <p style="line-height:.5;pointer-events: none;">NEXT</p>
                 <img src="img/comic_arrow-right.png" id="forwardArrow" class="headerImg">
                 
                </div>
@@ -490,92 +547,50 @@
                             		<p>31</p>
                                 </div>	
                             	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	 <div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>    <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>    <div class="goaldot" id="goal8dot"></div>
                                 </div>
 						</div>		
 						<div class="day"  id="calRow5Col2">
 							<div class="daybar" id="daybar"><p>1</p></div>	
                             	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>   		
 						<div class="day" id="calRow5Col3">
 							<div class="daybar" id="daybar"><p>2</p></div>	
                             	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>		
 						<div class="day"  id="calRow5Col4">
 							<div class="daybar" id="daybar"><p>3</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>
 						<div class="day" id="calRow5Col5">
 							<div class="daybar" id="daybar"><p>4</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>	
 						<div class="day" id="calRow5Col6">
 							<div class="daybar" id="daybar"><p>5</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>		
 						</div>		
 						<div class="daybrn" id="calRow5Col7">
 							<div class="daybar" id="daybar"><p>6</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	 <div class="goaldot" id="goal2dot"></div>   <div class="goaldot" id="goal3dot"></div>    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>    <div class="goaldot" id="goal6dot"></div>   <div class="goaldot" id="goal7dot"></div>    <div class="goaldot" id="goal8dot"></div>
                                 </div>		
 						</div>	
 					</div>	
@@ -586,127 +601,79 @@
                             		<p>31</p>
                                 </div>	
                             	<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div> 
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>
 						</div>		
 						<div class="day"  id="calRow6Col2">
 							<div class="daybar" id="daybar"><p>1</p></div>	
                             	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>   		
 						<div class="day" id="calRow6Col3">
 							<div class="daybar" id="daybar"><p>2</p></div>	
                             	    <div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>   <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>   <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>		
 						<div class="day"  id="calRow6Col4">
 							<div class="daybar" id="daybar"><p>3</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>
 						<div class="day" id="calRow6Col5">
 							<div class="daybar" id="daybar"><p>4</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>   <div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>	
 						</div>	
 						<div class="day" id="calRow6Col6">
 							<div class="daybar" id="daybar"><p>5</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>  <div class="goaldot" id="goal3dot"></div>   <div class="goaldot" id="goal4dot"></div>   
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>  <div class="goaldot" id="goal7dot"></div>   <div class="goaldot" id="goal8dot"></div>
                                 </div>		
 						</div>		
 						<div class="daybrn" id="calRow6Col7">
 							<div class="daybar" id="daybar"><p>6</p></div>	
                             		<div class="dots" id="dotContainer" data-date="" onclick="drawX(this);">
-                                    <div class="goaldot" id="goal1dot"></div>	
-                                    <div class="goaldot" id="goal2dot"></div>
-                                    <div class="goaldot" id="goal3dot"></div>
-                                    <div class="goaldot" id="goal4dot"></div>
-                                    <div class="goaldot" id="goal5dot"></div>
-                                    <div class="goaldot" id="goal6dot"></div>
-                                    <div class="goaldot" id="goal7dot"></div>
-                                    <div class="goaldot" id="goal8dot"></div>
+                                    <div class="goaldot" id="goal1dot"></div>	<div class="goaldot" id="goal2dot"></div>   <div class="goaldot" id="goal3dot"></div>    <div class="goaldot" id="goal4dot"></div>
+                                    <div class="goaldot" id="goal5dot"></div>   <div class="goaldot" id="goal6dot"></div>   <div class="goaldot" id="goal7dot"></div>    <div class="goaldot" id="goal8dot"></div>
                                 </div>		
 						</div>	
 					</div>	
 <!---------------------------------------- week 6 end ---------------------------------------->
 				</div>				
 		</div>
-		  
-<div id="testButton" style="display:inline-block; z-index:100; position:relative; width:50px; height:50px"><img src="img/blue_arrow.gif" width="100%" onClick="hideLegend()"></div>
- 
-
- <!---------------------END CALENDAR-  ------------------------------------------------------------------->  
- <!------------------------------------------------------------------------------------------------------->
- <!------------------------------------------------------------------------------------------------------->
- <!------------------------------------------------------------------------------------------------------->
- <!---------------------BEGIN LEGEND  --------------------------------------------------------------------> 
-        
+    </div>
+ <!---------------------END CALENDAR CONTAINER---------------------------------------------------------->  
+ <!----------------------------------------------------------------------------------------------------->
+ <!---------------------BEGIN LEGEND  ------------------------------------------------------------------> 
      <!---Legend container hack to make the legend vertically centered-->
      <div id="legendContainer" class="legendContainer">
        <!--- <div style="#position: absolute; #top: 50%;display: table-cell;margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:middle;height:inherit;">
         End legend container hack--> 						
               <div class="legend" id="legend" style="position:relative">
                     <!----"X" Close button ----->
-                   <div data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" 		data-iconshadow="true" data-wrapperels="span" style="z-index:10000; right:-96%; top:-15px;" title="Close"  onClick="hideLegend()"><span class="ui-btn-inner ui-btn-corner-all" style="z-index:10000"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow" style="z-index:10000">&nbsp;</span></span>
+                   <div data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" 		data-iconshadow="true" data-wrapperels="span" style="margin:2%; z-index:10000; right:-96%; top:-15px;" title="Close"  onClick="hideLegend()"><span class="ui-btn-inner ui-btn-corner-all" style="z-index:10000"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow" style="z-index:10000">&nbsp;</span></span>
                    </div>
                     <!----Title ----->        
                    <div style="padding:1px 0 0 0;
                         text-align:center;
                         width:89%;
                         display:inline-block;
-                        font-size:21px;color:#FFF;
+                        font-size:23px;color:#FFF;
                        text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
                              -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
                              -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
                              0 0 0.5em #006, 0 0 0.5em #006,
-                             0 0 0.5em #006, 0 0 0.5em #006;"><b>Current Goals</b>
+                             0 0 0.5em #006, 0 0 0.5em #006;"><b>My Goals</b>   
                    </div>
              </div>	
          
@@ -773,7 +740,7 @@
 						 <!--Color Picker -->      
 						 <div data-role="fieldcontain" style="margin:1px 0 9px 0; width:380px">
 			                  <div class="update-goals-label-n">Color:&nbsp;</div>
-					          <div class="update-goals-input-x"><input type="color" id="XColor" name="XColor" value=""#3355cc"></div>
+					          <div class="update-goals-input-x"><input type="color" id="XColor" name="XColor" value="#3355cc"></div>
 						 </div>
 						 
                   		 <!--buttons-->
@@ -803,6 +770,7 @@
     
       <!-- scripts concatenated and minified via ant build script-->
 			<script src="js/canvg.js"></script>
+			<script src="js/socket.io.js"></script>
     		<script src="js/rgbcolor.js"></script>
 			<script src="js/DBTC-lib-drawcanvas.js"></script>
 			<script src="js/raphael-min.js"></script>
@@ -810,12 +778,15 @@
 			<script src="js/jquery-1.8.2.js"></script>
 			<script src="js/spectrum.js"></script>
             <script src="js/DBTC-lib-db.js"></script>
-			<script src="js/DBTC-lib-globals.js"></script>
+
+            <script src="js/DBTC-lib-globals.js"></script>
+            <script src="js/DBTC-lib-serversync.js"></script>
             <script src="js/phonegap-1.7.0.js"></script>
             <script src="js/jquery.mobile-1.2.0.js"></script>
+
             
        <!--<script src="js/jquery.mobile.simpledialog2.min.js"></script> -->
-       <!--     <script src="js/jQueryRotateCompressed.2.2.js"></script> -->
+       <!-- <script src="js/jQueryRotateCompressed.2.2.js"></script> -->
        <!-- <script src="js/lostorage.min.js"></script> -->
             
             <!--includes below used for testing canvas on browser
@@ -829,18 +800,7 @@
       <!--Test scripts that haven't been moved to their own js libraries yet-->    
 		        
    		<script type="text/javascript">
-		   //test js
-		    $(document).ready(function() {
-				$('#legendContainer').toggle();
-			});
-			function hideLegend() {
-				//alert('Hiding...');
-				$('#legendContainer').toggle();
-			}
-			function showLegend() {
-				alert('Showing...');
-				$('#legendContainer').show("fast");
-			}
+ 
 		</script>
 	   
       <!-- End test scripts-->

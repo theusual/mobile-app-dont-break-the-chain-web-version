@@ -2,7 +2,31 @@
 textarea {
 	resize: none;
 }
-/**********Animated Background********************/
+/**************************** General ****************************/
+p{
+	color:#036;
+	font-size:13px;
+	vertical-align: auto;
+	text-align: center;
+	float: none;
+}
+.backgroundImage {
+	position:absolute; 
+	top: -16%;
+}
+#mainContainer{
+	margin: 0 auto;
+	padding-bottom: 0px;
+	width: 50em;
+	height: 39em;
+	text-align: center;
+	position: relative;
+	top: -15em;
+	left: 0;
+	z-index: 3;
+	overflow:hidden;
+}
+/**********Animated Cloud Background********************/
 #clouds{
 	padding: 100px 0;
 	background: #c9dbe9;
@@ -10,7 +34,6 @@ textarea {
 	background: -linear-gradient(top, #c9dbe9 0%, #fff 100%);
 	background: -moz-linear-gradient(top, #c9dbe9 0%, #fff 100%);
 }
-
 .cloud {
 	width: 200px; height: 60px;
 	background: rgb(255, 255, 255);
@@ -22,7 +45,6 @@ textarea {
 	
 	position: relative; 
 }
-
 .cloud:before, .cloud:after {
 	content: '';
 	position: absolute; 
@@ -38,12 +60,10 @@ textarea {
 	transform: rotate(30deg);
 	-moz-transform: rotate(30deg);
 }
-
 .cloud:after {
 	width: 120px; height: 120px;
 	top: -55px; left: auto; right: 15px;
 }
-
 /*Time to animate*/
 .x1 {
 	left: 30%;
@@ -52,104 +72,257 @@ textarea {
 	-o-animation: moveclouds 15s linear infinite;
 	opacity: 0.5;
 }
-
 /*variable speed, opacity, and position of clouds for realistic effect*/
 .x2 {
 	left: 35%;
-	
 	-webkit-transform: scale(0.6);
 	-moz-transform: scale(0.6);
 	transform: scale(0.6);
 	opacity: 0.6; /*opacity proportional to the size*/
-	
 	/*Speed will also be proportional to the size and opacity*/
 	/*More the speed. Less the time in 's' = seconds*/
 	-webkit-animation: moveclouds 25s linear infinite;
 	-moz-animation: moveclouds 25s linear infinite;
 	-o-animation: moveclouds 25s linear infinite;
 }
-
 .x3 {
-	left: 10%; top: -200px;
-	
+	left: 30%; 
+	top: -50px;
 	-webkit-transform: scale(0.8);
 	-moz-transform: scale(0.8);
 	transform: scale(0.8);
 	opacity: 0.8; /*opacity proportional to the size*/
-	
-	-webkit-animation: moveclouds 20s linear infinite;
-	-moz-animation: moveclouds 20s linear infinite;
-	-o-animation: moveclouds 20s linear infinite;
+	-webkit-animation: moveclouds 28s linear infinite;
+	-moz-animation: moveclouds 28s linear infinite;
+	-o-animation: moveclouds 28s linear infinite;
 }
-
 .x4 {
-	left: 32%; top: -250px;
-	
+	left: 32%; 
+	top: -100px;
 	-webkit-transform: scale(0.75);
 	-moz-transform: scale(0.75);
 	transform: scale(0.75);
 	opacity: 0.75; /*opacity proportional to the size*/
-	
-	-webkit-animation: moveclouds 18s linear infinite;
-	-moz-animation: moveclouds 18s linear infinite;
-	-o-animation: moveclouds 18s linear infinite;
+	-webkit-animation: moveclouds 23s linear infinite;
+	-moz-animation: moveclouds 23s linear infinite;
+	-o-animation: moveclouds 23s linear infinite;
 }
-
 .x5 {
-	left: 10%; top: -150px;
-	
+	left: 20%; 
+	top: -175px;
 	-webkit-transform: scale(0.8);
 	-moz-transform: scale(0.8);
 	transform: scale(0.8);
 	opacity: 0.45; /*opacity proportional to the size*/
-	
 	-webkit-animation: moveclouds 42s linear infinite;
 	-moz-animation: moveclouds 42s linear infinite;
 	-o-animation: moveclouds 42s linear infinite;
 }
-
 @-webkit-keyframes moveclouds {
-	0% {margin-left: 1000px;}
-	100% {margin-left: -1000px;}
+	0% {margin-left: 1200px;}
+	100% {margin-left: -800px;}
 }
 @-moz-keyframes moveclouds {
-	0% {margin-left: 1000px;}
-	100% {margin-left: -1000px;}
+	0% {margin-left: 1200px;}
+	100% {margin-left: -800px;}
 }
 @-o-keyframes moveclouds {
-	0% {margin-left: 1000px;}
-	100% {margin-left: -1000px;}
+	0% {margin-left: 1200px;}
+	100% {margin-left: -800px;}
 }
-/**************************** General ****************************/
-p{
-	color:#036;
-	font-size:13px;
-	vertical-align: auto;
-	text-align: center;
-	float: none;
-}
-
-/**************************** Calendar ****************************/
-#calendar{
-	margin: 0 auto;
-	padding-top: 10px;
-	padding-bottom: 50px;
-	padding-left: 1px;
-	width: 722px;
-	text-align: center;
+/**************************** Login Page ****************************/
+#loginPage{
+	z-index: 200;
 	position: absolute;
-	top: 5%;
-	left: 30%;
-	z-index: 3;
-}
-
-#calcontainer{
-	margin:0 0 0 0;
+	margin: 0 0px 0 0;
 	float:left;
-	width: 92.5%;
-    background-color: rgba(255,255,255,.6);
+	width: 80%;
+	left: 10%;
+	top: 2%;
+	background-color: rgba(255,255,255,.6);
+	transition: left .75s ease-in; 
+    -webkit-transition: left .75s ease-in; 
+    -moz-transition: left .75s ease-in; 
+    -o-transition: left .75s ease-in; 
+	/*
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	opacity: 1;
+	-webkit-animation-name: popin;
+	-moz-animation-name: popin;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
+	-webkit-animation-timing-function: ease-in-out;
+	-moz-animation-timing-function: ease-in-out;
+	-webkit-transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;*/
 }
-
+#loginPage.transitionIn{
+	left: 10%;
+}
+#loginPage.transitionOut{
+	left: 100%;
+}
+.login-form-line{
+	margin:0px 0 9px 0; }
+.login-input{
+	display:inline-block;
+	width: 55%;
+}
+.login-label{
+	margin:0 1% 0 1%;
+	display:inline-block;
+	text-align:right;
+	line-height:1.8;
+		font-size:16px;
+	line-height:1;
+	font-weight:bold;
+	text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+				 -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+				 -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+				 0 0 0.3em #006, 0 0 0.2em #006,
+        		 0 0 0.3em #006, 0 0 0.3em #006;
+}
+#login-group-rememberMe{
+	width: 39%;
+	left: 50%;
+	margin: .5em;
+}
+.loginButtons{
+	width: 90%;
+	display: block;
+	left: 5%;
+	padding-bottom: 1.5%;
+	margin-bottom: 1.5% !important;
+	font-size: 35px !important;
+}
+#loginOr{
+    font-style: italic;
+    margin-bottom: .5%;
+}
+/****************************Small Legend*************************/
+#smallLegendContainer{
+	width: 7%;
+	display: table; 
+	height: auto; 
+	position: relative; 
+	overflow: hidden; 
+	float:left;
+	margin: 1% 0 0 0;
+	background-color: rgba(255,255,255,.6);
+}
+#smallLegendCenteringHack{
+	position: relative; 
+	top: 50%;
+	display: table-cell;
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:middle;
+	height:inherit;
+	float:left;
+	background-color: rgba(255,255,255,.6);
+}
+#smallLegend{
+	float:left;
+	border: 2px solid #e5e5e5;
+	background:white;
+	margin:0;
+	width:100%;
+	font-size:100%;
+	height: auto;
+}
+.smallGoalDesc{
+	float:left;
+	width:65%;
+	border-radius:15px;
+	margin-left:0px;
+	margin-top:0px;
+	margin-right:0px;
+	cursor:pointer;
+	height: auto;
+	padding-left: 0px;
+	/**border: 1px solid #e5e5e5;**/
+	border-width: 1px;
+	border-color: #039;
+	display:inline-block;
+	border: 1px solid #3CF;
+	color:#627F81;
+}
+.smallGoalDesc:hover{
+	border: 1px solid #006;
+	display:inline-block;
+	color:#006;
+	/**background: #CCC;**/
+}
+.smallGoalDescSelected{
+	float:left;
+	width:65%;
+	border-radius:15px;
+	margin-left:0px;
+	margin-top:0px;
+	margin-right:0px;
+	cursor:pointer;
+	height: auto;
+	padding-left: 0px;
+	border: 1px solid #e5e5e5;
+	background: #3CF;
+	display:inline-block;
+	color:#FFF;
+}
+.smallGoalDescSelected:hover{
+	border: 1px solid #3CF;
+	display:inline-block;
+	/**background: #CCC;**/
+}
+.smallGoalDot{
+	margin:0;
+	float:right;
+	width:29px;
+	height:29px;
+	border-radius:15px;
+	margin-left:3px;
+	margin-top:2px;
+	margin-bottom:2px;
+	cursor:pointer;
+	border: 2px solid rgb(112, 112, 112);
+	clear:none;
+}
+/**************************** Calendar ****************************/
+#calendarContainer{
+	margin:0 0 0 0;
+	position: absolute;
+	width: 100%;
+	top: .4em;
+	left: 100%;
+	display: block;
+	transition: left .75s ease-in; 
+    -webkit-transition: left .75s ease-in; 
+    -moz-transition: left .75s ease-in; 
+    -o-transition: left .75s ease-in; 
+}
+#calendarContainer.transitionIn{
+ 	left: 0px;
+}
+#calendarContainer.transitionOut{
+ 	left: 100%px;
+}
+#calendar{
+	position: relative;
+	margin: 0 2.5% 0 0;
+	float: right;
+	width: 90.5%;
+	top: .4em;
+	left: 0%;
+	display: inline-block;
+	background-color: rgba(255,255,255,.6);
+	transition: left .75s ease-in; 
+    -webkit-transition: left .75s ease-in; 
+    -moz-transition: left .75s ease-in; 
+    -o-transition: left .75s ease-in; 
+}
 .calHeader{
 	width:100%;
 	height:38px;
@@ -179,12 +352,14 @@ p{
 	height: inherit;
 }
 .calTitle{
-	width:56%;
+	width: 51%;
 	height:38px;
 	/**height:46px**/
 	float:left;
 	text-align:center;
+	pointer-events: none;
 	/**background:white;**/
+;
 }
 .calTitle h2{
 	line-height:1.1;
@@ -197,18 +372,20 @@ p{
 				 -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
 				 0 0 0.4em #006, 0 0 0.4em #006,
         		 0 0 0.4em #006, 0 0 0.4em #006;	
+    pointer-events: none;
 }
 
 .previousMonth{
-	width:22%;
-	float:left;
+	width: 22%;
+	float: left;
 	height:38px;
 	/**height:46px**/
 	cursor:pointer;
+	margin-left: 20px;
 }
 .nextMonth{
-	width:22%;
-	float:right;
+	width: 18%;
+	float: left;
 	height:38px;
 	/**height:46px**/
 	cursor:pointer;
@@ -241,6 +418,7 @@ p{
 	font-size:100%;
 	vertical-align:baseline;
 	height: inherit;
+	pointer-events: none;
 }
 .dayweek p{
 	display:block;
@@ -276,9 +454,9 @@ p{
 .dayToday:hover{background-color: rgba(230,230,230,.6); cursor:pointer;}
 .dayOtherMonth:hover{background-color: rgba(245,245,245,.6); cursor:pointer;}
 
-.daybar{width:100%;float:left;background:#e0ecf3;}
-.daybarOtherMonth{width:100%;float:left;background:#e0ecf3;}
-.daybarToday{color:#71CBD3!important; font-weight:bold!important; font-size:15px!important;}
+.daybar{width:100%;float:left;background:#e0ecf3;pointer-events: none;}
+.daybarOtherMonth{width:100%;float:left;background:#e0ecf3;pointer-events: none;}
+.daybarToday{color:#71CBD3!important; font-weight:bold!important; font-size:15px!important;pointer-events: none;}
 .daybar p{margin-left:5px;
 		margin-top:0px;
 		/*margin-top:3px;*/
@@ -287,7 +465,9 @@ p{
 		font-size:15px;
 		font-weight:bold;
 		color:#969696;
-		text-shadow:0 1px 0 #ffffff;}
+		text-shadow:0 1px 0 #ffffff;
+		pointer-events: none;
+		}	
 
 .daybarOtherMonth p{
 	margin-left:5px;
@@ -296,7 +476,8 @@ p{
 	margin-bottom:0px;
 	/*margin-bottom:3px;*/
 	font-size:15px;
-	color:#969696;}
+	color:#969696;
+	pointer-events: none;}
 
 
 .dots{
@@ -448,19 +629,28 @@ p{
 	padding:0;
 	border:0;
 	outline:0;
-	font-size:100%;
 	vertical-align:baseline;
 	height:inherit;
 	position:absolute;
 	z-index:1000;
-	width: 65%;
+	width: 72%;
 	padding-left:0px;
 	display:inline-block;
-	margin-top:-10px;
-	top:11%;
-	left:30%;
+	top: 2.4em;
+	left: 8em;
+	
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	opacity: 1;
+	-webkit-animation-name: popin;
+	-moz-animation-name: popin;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
+	-webkit-animation-timing-function: ease-out;
+	-moz-animation-timing-function: ease-out;
+	-webkit-transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;
 }
-
 .legendLine {
 	display: block;
 }
@@ -506,11 +696,10 @@ p{
 				 0 0 0.3em #006, 0 0 0.2em #006,
         		 0 0 0.3em #006, 0 0 0.3em #006;
 }
-
 /*****JQM CSS Overrides*****/
 .ui-btn-inner{
 	padding:4px 4px;
-	font-size:13px;
+	/*font-size:13px;*/
 }
 .ui-btn-up-b{
 	border: 1px solid #111;
