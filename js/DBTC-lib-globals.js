@@ -8,7 +8,7 @@
 			//Set current App settings
 			$.AppSettings = 
 				{
-					dbVersion: '.68',
+					dbVersion: '.692',
 					testing: 'false'
 				};	
 			//Run tests			
@@ -28,7 +28,7 @@
 			$.mobile.loadingMessage = false;
 			//start the process of checking DB versions and creating the DB if necessary
 			checkDBVersion();
-				
+		
 });	
 
 $(document).ready(function(){
@@ -69,7 +69,7 @@ $(document).ready(function(){
 		updateLegendHTML();
 		
 		//initiate the legend to highlight the current selected goal
-		setGoal($.CurrentUserSettings.SelectedGoal);
+		setGoal($.UserSettings.SelectedGoal);
 				
 
 });	
@@ -87,26 +87,26 @@ function buildMonth(nextPrev)
 		//First, move the selected month forward (next) or backward (prev) depending on which button was clicked, if (current) do nothing
 		if(nextPrev === 'next')
 		{
-			$.CurrentUserSettings.SelectedMonth++;
+			$.UserSettings.SelectedMonth++;
 			
-			if($.CurrentUserSettings.SelectedMonth === 13)
+			if($.UserSettings.SelectedMonth === 13)
 			{
 				//reset selected month to 1(January)
-				$.CurrentUserSettings.SelectedMonth=1;
+				$.UserSettings.SelectedMonth=1;
 				//change the selected year to next one in line
-				$.CurrentUserSettings.SelectedYear++;
+				$.UserSettings.SelectedYear++;
 			}
 		} 
 		if(nextPrev === 'prev')
 		{
-			$.CurrentUserSettings.SelectedMonth--;
+			$.UserSettings.SelectedMonth--;
 			
-			if($.CurrentUserSettings.SelectedMonth === 0)
+			if($.UserSettings.SelectedMonth === 0)
 			{
 				//reset selected month to 12 (December)
-				$.CurrentUserSettings.SelectedMonth=12;
+				$.UserSettings.SelectedMonth=12;
 				//change the selected year to one previous
-				$.CurrentUserSettings.SelectedYear--;
+				$.UserSettings.SelectedYear--;
 			}
 		} 	
 		//build calendar by updating calendar header, day headers, and the data-date contained in each day div
@@ -138,17 +138,17 @@ function buildMonthDates()
 			NewMonth;
 			
 		//update calendar header
-		$('#calTitle').html('<h2>' + cal_months_labels[($.CurrentUserSettings.SelectedMonth-1)] + ' ' + $.CurrentUserSettings.SelectedYear + '</h2>');
+		$('#calTitle').html('<h2>' + cal_months_labels[($.UserSettings.SelectedMonth-1)] + ' ' + $.UserSettings.SelectedYear + '</h2>');
 		//line below is deprecated -- use if wanting to load static month images instead of dynamic text
-		//$('#calTitleImage').html('<img src="img/' + cal_months_labels[($.CurrentUserSettings.SelectedMonth-1)] + '.gif" class="headerImg">');
+		//$('#calTitleImage').html('<img src="img/' + cal_months_labels[($.UserSettings.SelectedMonth-1)] + '.gif" class="headerImg">');
 		//get month lengths	
-		monthLength = getMonthLength($.CurrentUserSettings.SelectedMonth);
-		prevMonthLength = getMonthLength(($.CurrentUserSettings.SelectedMonth-1));				
+		monthLength = getMonthLength($.UserSettings.SelectedMonth);
+		prevMonthLength = getMonthLength(($.UserSettings.SelectedMonth-1));				
 		// get starting day of the month for use int the first row calculations
-		if($.CurrentUserSettings.SelectedMonth === 1)
-			firstDay = new Date(($.CurrentUserSettings.SelectedYear-1), '12', 1);
+		if($.UserSettings.SelectedMonth === 1)
+			firstDay = new Date(($.UserSettings.SelectedYear-1), '12', 1);
 		else
-			firstDay = new Date($.CurrentUserSettings.SelectedYear, $.CurrentUserSettings.SelectedMonth-1, 1);
+			firstDay = new Date($.UserSettings.SelectedYear, $.UserSettings.SelectedMonth-1, 1);
 		startingDay = firstDay.getDay();
 		prevMonthCounter = startingDay;
 		
@@ -163,10 +163,10 @@ function buildMonthDates()
 				//change the daybar class which will un-bold the date text
 				$('#calRow1Col'+j).find('#daybar').attr('class','daybarOtherMonth');
 				//update the data-date 
-				if($.CurrentUserSettings.SelectedMonth === 1)
-					$('#calRow1Col'+j).find('#dotContainer').attr('data-date', '12' + '/' + (32-prevMonthCounter) + '/' + $.CurrentUserSettings.SelectedYear-1);
+				if($.UserSettings.SelectedMonth === 1)
+					$('#calRow1Col'+j).find('#dotContainer').attr('data-date', '12' + '/' + (32-prevMonthCounter) + '/' + $.UserSettings.SelectedYear-1);
 				else
-					$('#calRow1Col'+j).find('#dotContainer').attr('data-date',($.CurrentUserSettings.SelectedMonth - 1) + '/' + ((prevMonthLength+1)-prevMonthCounter) + '/' + $.CurrentUserSettings.SelectedYear);
+					$('#calRow1Col'+j).find('#dotContainer').attr('data-date',($.UserSettings.SelectedMonth - 1) + '/' + ((prevMonthLength+1)-prevMonthCounter) + '/' + $.UserSettings.SelectedYear);
 				//update day header 
 				$('#calRow1Col'+j).find('#daybar').html('<p>' + (32-prevMonthCounter) + '</p>');
 				//add right side border to last day of previous month
@@ -194,7 +194,7 @@ function buildMonthDates()
 				//clear the right border
 				$('#calRow1Col'+j).find('#dotContainer').css("border-right","0px solid #e5e5e5");
 				//update the data-date 
-				$('#calRow1Col'+j).find('#dotContainer').attr('data-date',($.CurrentUserSettings.SelectedMonth) + '/' + (j - startingDay) + '/' + $.CurrentUserSettings.SelectedYear);
+				$('#calRow1Col'+j).find('#dotContainer').attr('data-date',($.UserSettings.SelectedMonth) + '/' + (j - startingDay) + '/' + $.UserSettings.SelectedYear);
 				//update day header
 				$('#calRow1Col'+j).find('#daybar').html('<p>' + (j-startingDay) + '</p>');
 				currentMonthCounter++;
@@ -208,7 +208,7 @@ function buildMonthDates()
 			for(j = 1; j < 8; j++)
 			{					
 				//update the data-date 
-				$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date',($.CurrentUserSettings.SelectedMonth) + '/' + (currentMonthCounter) + '/' + $.CurrentUserSettings.SelectedYear);
+				$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date',($.UserSettings.SelectedMonth) + '/' + (currentMonthCounter) + '/' + $.UserSettings.SelectedYear);
 				//update day header
 				$('#calRow'+i+'Col'+j).find('#daybar').html('<p>' + (currentMonthCounter) + '</p>');
 				currentMonthCounter++;
@@ -237,7 +237,7 @@ function buildMonthDates()
 					//unbold the date header
 					$('#calRow'+i+'Col'+j).find('#daybar').attr('class','daybar');
 					//update the data-date 
-					$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date',($.CurrentUserSettings.SelectedMonth) + '/' + (currentMonthCounter) + '/' + $.CurrentUserSettings.SelectedYear);
+					$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date',($.UserSettings.SelectedMonth) + '/' + (currentMonthCounter) + '/' + $.UserSettings.SelectedYear);
 					//update day header
 					$('#calRow'+i+'Col'+j).find('#daybar').html('<p>' + (currentMonthCounter) + '</p>');
 					//add right side border to last day of month
@@ -258,10 +258,10 @@ function buildMonthDates()
 					//clear the right border
 					$('#calRow'+i+'Col'+j).find('#dotContainer').css("border-right","0px solid #e5e5e5");
 					//update the data-date 
-					if($.CurrentUserSettings.SelectedMonth === 12)
-						$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date', '1' + '/' + (nextMonthCounter) + '/' + ($.CurrentUserSettings.SelectedYear+1));
+					if($.UserSettings.SelectedMonth === 12)
+						$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date', '1' + '/' + (nextMonthCounter) + '/' + ($.UserSettings.SelectedYear+1));
 					else
-						$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date',($.CurrentUserSettings.SelectedMonth+1) + '/' + (nextMonthCounter) + '/' + $.CurrentUserSettings.SelectedYear);
+						$('#calRow'+i+'Col'+j).find('#dotContainer').attr('data-date',($.UserSettings.SelectedMonth+1) + '/' + (nextMonthCounter) + '/' + $.UserSettings.SelectedYear);
 					//update day header
 					$('#calRow'+i+'Col'+j).find('#daybar').html('<p>' + (nextMonthCounter) + '</p>');
 					nextMonthCounter++;
@@ -269,7 +269,7 @@ function buildMonthDates()
 			}
 		}
 		//highlight background of day that contains today's date
-		$('div[data-date="' + $.CurrentUserSettings.CurrentDate + '"]').parent().attr('class','dayToday');
+		$('div[data-date="' + $.UserSettings.CurrentDate + '"]').parent().attr('class','dayToday');
 	}
 	
 function loadXs(goalNum)
@@ -281,35 +281,35 @@ function loadXs(goalNum)
 			//iterate through each goal table if it contains data. draw an X for each date found in the table.  Note: Using iterator variable j instead of goalnum
 			for(var j = 1; j<9; j++)
 			{
-				if ($["Goal"+j].DayDate.length > 0)
+				if ($.UserGoals["Goal"+j].DayDate.length > 0)
 				{
-					for (var i = 0; i < $["Goal"+j].DayDate.length; i++)
+					for (var i = 0; i < $.UserGoals["Goal"+j].DayDate.length; i++)
 					 {
-					  if($["Goal"+j].DayDate[i] !== null)
+					  if($.UserGoals["Goal"+j].DayDate[i] !== null)
 						{	  
-						  var DayObj = $(document).find("[data-date='" + $["Goal"+j].DayDate[i] + "']");
+						  var DayObj = $(document).find("[data-date='" + $.UserGoals["Goal"+j].DayDate[i] + "']");
 						  if(DayObj.attr('data-date') !== undefined)
 						  {
 							  var DayDOM = DayObj.find("#goal"+j+"dot")[0];
-					          drawXsvg(DayDOM,$["Goal"+j].XColor);	
+					          drawXsvg(DayDOM,$.UserGoals["Goal"+j].XColor);
 						  }
 						}		  
 					 }
 				}
 			}
 		}		
-		else if ($["Goal"+goalNum].DayDate.length > 0)
+		else if ($.UserGoals["Goal"+goalNum].DayDate.length > 0)
 			{
-				for (var i = 0; i < $["Goal"+goalNum].DayDate.length; i++)
+				for (var i = 0; i < $.UserGoals["Goal"+goalNum].DayDate.length; i++)
 				 {
-				  if($["Goal"+goalNum].DayDate[i] !== null)
+				  if($.UserGoals["Goal"+goalNum].DayDate[i] !== null)
 					{	  
-					  var DayObj = $(document).find("[data-date='" + $["Goal"+goalNum].DayDate[i] + "']");
+					  var DayObj = $(document).find("[data-date='" + $.UserGoals["Goal"+goalNum].DayDate[i] + "']");
 					  if(DayObj.attr('data-date') !== undefined)
 					  {
 					  	  $(DayObj).find("#goal"+goalNum+"dot").empty();
 						  var DayDOM = DayObj.find("#goal"+goalNum+"dot")[0];
-				          drawXsvg(DayDOM,$["Goal"+goalNum].XColor);	
+				          drawXsvg(DayDOM,$.UserGoals["Goal"+goalNum].XColor);
 					  }
 					}		  
 				 }
@@ -318,24 +318,34 @@ function loadXs(goalNum)
 	
 function unloadXs(goalNum)
 	{		
-		if ($["Goal"+goalNum].DayDate.length > 0)
+		if ($.UserGoals["Goal"+goalNum].DayDate.length > 0)
 			{
-				for (var i = 0; i < $["Goal"+goalNum].DayDate.length; i++)
+				for (var i = 0; i < $.UserGoals["Goal"+goalNum].DayDate.length; i++)
 				 {
-				  if($["Goal"+goalNum].DayDate[i] !== null)
+				  if($.UserGoals["Goal"+goalNum].DayDate[i] !== null)
 					{	  
-					  var DayObj = $(document).find("[data-date='" + $["Goal"+goalNum].DayDate[i] + "']");
+					  var DayObj = $(document).find("[data-date='" + $.UserGoals["Goal"+goalNum].DayDate[i] + "']");
 					  if(DayObj.attr('data-date') !== undefined)
 					  {
 						  var DayDOM = DayObj.find("#goal"+goalNum+"dot")[0];
 				          $(DayObj).find("#goal"+goalNum+"dot").empty();
-						  unDrawXsvg(DayDOM, $["Goal"+goalNum].XColor);
+						  unDrawXsvg(DayDOM, $.UserGoals["Goal"+goalNum].XColor);
 					  }
 					}		  
 				 }
 			}	
 	}
-	
+
+//-------------------------------------------------------------------------------------------
+//Legend related functions
+//-------------------------------------------------------------------------------------------
+
+//toggle showing the legend
+function toggleLegend()
+{
+    $('#legendContainer').toggle();
+}
+
 //Handle the "Add Goal" button on Legend
 function legendAddGoal_btnHandler() 
 	{
@@ -348,10 +358,10 @@ function legendAddGoal_btnHandler()
 			}
 			
 			//Activate the next goal
-			$["Goal"+nextGoal].Active = 1
+			$.UserGoals["Goal"+nextGoal].Active = 1
 			
 			//add the new goal to the array used to persist the goal ordering across logins, then update the DB with new settings
-			$.CurrentUserSettings.goalsSortOrder.push(nextGoal);
+			$.UserSettings.goalsSortOrder.push(nextGoal);
 			updateDB_CurrentSettings();
 				
 			//call function to add next goal html to the legend
@@ -384,8 +394,8 @@ function legendAddGoal(goalNum)
 function legendAddGoals_OnStartup() 
 	{
 		//iterate over the goalsSortOrder array and for each goal found, add it to the legend in sequential order
-		for(var i=0;i<$.CurrentUserSettings.goalsSortOrder.length;i++)
-			legendAddGoal($.CurrentUserSettings.goalsSortOrder[i]);
+		for(var i=0;i<$.UserSettings.goalsSortOrder.length;i++)
+			legendAddGoal($.UserSettings.goalsSortOrder[i]);
 		
 		//set current goal to the first active goal found
 		setGoal(legendFindActiveGoal());
@@ -395,16 +405,16 @@ function legendAddGoals_OnStartup()
 function updateGoalInfo(goalNum)
 	{				
 		//reload Xs for selected goal if color changed
-	 	if($["Goal"+goalNum].XColor !== document.forms["frmGoals"]["XColor"].value)
+	 	if($.UserGoals["Goal"+goalNum].XColor !== document.forms["frmGoals"]["XColor"].value)
  			{
- 				$["Goal"+goalNum].XColor = document.forms["frmGoals"]["XColor"].value;
+ 				$.UserGoals["Goal"+goalNum].XColor = document.forms["frmGoals"]["XColor"].value;
  				loadXs(goalNum);					 				
  			}
  			
  		//update the goal object in memory	
- 		$["Goal"+goalNum].Description = document.forms["frmGoals"]["goalName"].value;
- 		$["Goal"+goalNum].Notes = document.forms["frmGoals"]["goalNote"].value;
- 		$["Goal"+goalNum].XGoal = document.forms["frmGoals"]["goalX"].value;
+ 		$.UserGoals["Goal"+goalNum].Description = document.forms["frmGoals"]["goalName"].value;
+ 		$.UserGoals["Goal"+goalNum].Notes = document.forms["frmGoals"]["goalNote"].value;
+ 		$.UserGoals["Goal"+goalNum].XGoal = document.forms["frmGoals"]["goalX"].value;
 		
 		//update the databases
 		updateDB_Goal(goalNum);
@@ -421,20 +431,20 @@ function updateLegendHTML()
 	{
 			//update the HTML being displayed in the goal legend using goal info stored in DB
 			for(var i=1;i<11;i++)	
-				$('#goal'+i+'t').html($["Goal"+i].Description);			
+				$('#goal'+i+'t').html($.UserGoals["Goal"+i].Description);
 			//update the colors displayed in the legend
 			for(var i=1;i<11;i++)
-				$('#legendDotGoal'+i).css("background",$["Goal"+i].XColor);		
+				$('#legendDotGoal'+i).css("background",$.UserGoals["Goal"+i].XColor);
 			//update the colors displayed in the small legend
 			for(var i=1;i<11;i++)
-				$('#smallLegendDotGoal'+i).css("background",$["Goal"+i].XColor);
+				$('#smallLegendDotGoal'+i).css("background",$.UserGoals["Goal"+i].XColor);
 	}	
 	
 function legendFindNextGoal() 
 	{
 		for(var i=1;i<11;i++)
 		{
-			if($["Goal"+i].Active === 0) 
+			if($.UserGoals["Goal"+i].Active === 0)
 			{
 				return i;
 			}
@@ -445,7 +455,7 @@ function legendFindActiveGoal()
 	{
 		for(var i=1;i<11;i++)
 		{
-			if($["Goal"+i].Active === 1) 
+			if($.UserGoals["Goal"+i].Active === 1)
 			{
 				return i;
 			}
@@ -455,23 +465,23 @@ function legendFindActiveGoal()
 function legendRemoveGoal() 
 	{		
 			//remove drawn calendar Xs
-			unloadXs($.CurrentUserSettings.SelectedGoal);
+			unloadXs($.UserSettings.SelectedGoal);
 			
 			//reset goal object to default settings
-			$("#legendLine"+$.CurrentUserSettings.SelectedGoal).empty().remove();
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].Active = 0;
-			//$["Goal"+$.CurrentUserSettings.SelectedGoal].SortOrder = $["Goal"+$.CurrentUserSettings.SelectedGoal].SortOrder + 10;	
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].Description = 'Goal';
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].Notes = '';
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].XGoal = '30';
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].DayDate = [];	
-			$["Goal"+$.CurrentUserSettings.SelectedGoal].XColor = $.CurrentUserSettings.defaultGoalColor[$.CurrentUserSettings.SelectedGoal];	
+			$("#legendLine"+$.UserSettings.SelectedGoal).empty().remove();
+			$.UserGoals["Goal"+$.UserSettings.SelectedGoal].Active = 0;
+			//$.UserGoals["Goal"+$.UserSettings.SelectedGoal].SortOrder = $.UserGoals["Goal"+$.UserSettings.SelectedGoal].SortOrder + 10;
+			$.UserGoals["Goal"+$.UserSettings.SelectedGoal].Description = 'Goal';
+			$.UserGoals["Goal"+$.UserSettings.SelectedGoal].Notes = '';
+			$.UserGoals["Goal"+$.UserSettings.SelectedGoal].XGoal = '30';
+			$.UserGoals["Goal"+$.UserSettings.SelectedGoal].DayDate = [];
+			$.UserGoals["Goal"+$.UserSettings.SelectedGoal].XColor = $.UserSettings.defaultGoalColor[$.UserSettings.SelectedGoal];
 
 			//update goal object in DB
-			updateDB_Goal($.CurrentUserSettings.SelectedGoal);	
+			updateDB_Goal($.UserSettings.SelectedGoal);	
 			
 			//remove the goal from the goalsSortOrder array used to persist ordering across logins, then update DB with new settings
-			$.CurrentUserSettings.goalsSortOrder.splice($.CurrentUserSettings.goalsSortOrder.indexOf($.CurrentUserSettings.SelectedGoal),1);
+			$.UserSettings.goalsSortOrder.splice($.UserSettings.goalsSortOrder.indexOf($.UserSettings.SelectedGoal),1);
 			updateDB_CurrentSettings();
 			
 			//reset current goal to first active goal found)
@@ -488,42 +498,42 @@ function setGoal(goalNum)
 		$('#goal'+ goalNum).attr('class', 'goalDescSelected');
 		
 		//store the new selected goal in the global user settings variable
-		$.CurrentUserSettings.SelectedGoal = goalNum;
+		$.UserSettings.SelectedGoal = goalNum;
 		
 		//update the edit goal form
-		document.forms["frmGoals"]["goalName"].value = $["Goal"+goalNum].Description;
-		document.forms["frmGoals"]["goalNote"].value = $["Goal"+goalNum].Notes;
-		document.forms["frmGoals"]["goalX"].value = $["Goal"+goalNum].XGoal;
-		$("#XColor").spectrum("set", $["Goal"+goalNum].XColor);
+		document.forms["frmGoals"]["goalName"].value = $.UserGoals["Goal"+goalNum].Description;
+		document.forms["frmGoals"]["goalNote"].value = $.UserGoals["Goal"+goalNum].Notes;
+		document.forms["frmGoals"]["goalX"].value = $.UserGoals["Goal"+goalNum].XGoal;
+		$("#XColor").spectrum("set", $.UserGoals["Goal"+goalNum].XColor);
 		
 		//Set the X drawing location
-		$.CurrentUserSettings.DrawDotDiv = ('#goal' + goalNum + 'dot');
+		$.UserSettings.DrawDotDiv = ('#goal' + goalNum + 'dot');
 		
 		//Set the current color for drawing Xs to the current Xcolor of the selected goal
-		$.CurrentUserSettings.DrawColor = $["Goal" + goalNum].XColor;	
+		$.UserSettings.DrawColor = $.UserGoals["Goal" + goalNum].XColor;
 }
 
 function drawX(clickedDayDiv) 
 {
 	var ClickedDate = $(clickedDayDiv).attr('data-date');
 	//find the correct DOM ojbect (NOT a jQuery object!) to feed to the drawing functions
-	var DrawDotDivDOM =  $(clickedDayDiv).find($.CurrentUserSettings.DrawDotDiv)[0];
+	var DrawDotDivDOM =  $(clickedDayDiv).find($.UserSettings.DrawDotDiv)[0];
 	var DayDBLocation = checkDay(ClickedDate);
 	//console.log("Drawing Date:" + ClickedDate);
 	if (DayDBLocation < 0)
 		{
 			//insert day into DB
-			//alert('Calling insertDay() with currentl selected goal:' + $.CurrentUserSettings.SelectedGoal);
+			//alert('Calling insertDay() with currentl selected goal:' + $.UserSettings.SelectedGoal);
 			insertDay(ClickedDate);
 			
 			//draw the X
 			if(Modernizr.svg) 
 			{
 				//empty any leftover SVG segments from the DIV so that it does not affect the new X
-				$(clickedDayDiv).find($.CurrentUserSettings.DrawDotDiv).empty();
-			    drawXsvg(DrawDotDivDOM, $.CurrentUserSettings.DrawColor);
+				$(clickedDayDiv).find($.UserSettings.DrawDotDiv).empty();
+			    drawXsvg(DrawDotDivDOM, $.UserSettings.DrawColor);
 			} else{
-				  drawXcanvas(DrawDotDivDOM,$.CurrentUserSettings.DrawColor);
+				  drawXcanvas(DrawDotDivDOM,$.UserSettings.DrawColor);
 			  	  }
 			   
 		} else 
@@ -532,38 +542,73 @@ function drawX(clickedDayDiv)
 				removeDay(ClickedDate, DayDBLocation);
 				
 				//undraw the X
-				$(clickedDayDiv).find($.CurrentUserSettings.DrawDotDiv).empty();
-				unDrawXsvg(DrawDotDivDOM, $.CurrentUserSettings.DrawColor);
+				$(clickedDayDiv).find($.UserSettings.DrawDotDiv).empty();
+				unDrawXsvg(DrawDotDivDOM, $.UserSettings.DrawColor);
 			}
 		switch (true) {
-			case ($.CurrentUserSettings.Count === 30):  window.alert("Over a month?! You fucking rock!");
+			case ($.UserSettings.Count === 30):  window.alert("Over a month?! You fucking rock!");
 				break;
-			case $.CurrentUserSettings.Count === 20:  window.alert("20 days? That's actually impressive.  No, really!");
+			case $.UserSettings.Count === 20:  window.alert("20 days? That's actually impressive.  No, really!");
 				break;
-			case $.CurrentUserSettings.Count === 10:  window.alert("10 days? Well, I've seen worse...");
+			case $.UserSettings.Count === 10:  window.alert("10 days? Well, I've seen worse...");
 				break;
-			case $.CurrentUserSettings.Count === 5:  window.alert("5 down! It's a start...!");
+			case $.UserSettings.Count === 5:  window.alert("5 down! It's a start...!");
 				break;		
 		}
-		$.CurrentUserSettings.Count++;
+		$.UserSettings.Count++;
 }
 
 /////////////////////////////
 //Form functions
 /////////////////////////////
-function validateGoalsForm()
-	{
+function validateGoalsForm(){
 	var x=document.forms["frmGoals"]["goalName"].value;
-	if (x.length === 20)
-	  {
+	if (x.length === 20) {
 	  alert("Sorry! Goal name must be 20 chars. or less");
 	  return false;
-	  }	else {
+	}
+    else {
 		  	//if everything validates then update goal info
 		  	updateGoalInfo();
-	  }
 	}
-	
+}
+
+function validateRegistrationForm(){
+    var userName=document.forms["frmRegistration"]["regUserName"].value;
+    var userPassword1=document.forms["frmRegistration"]["regUserPassword1"].value;
+    var userPassword2=document.forms["frmRegistration"]["regUserPassword2"].value;
+
+    var emailRegExp = /[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-Za-z0-9](?:[a-z0-9-]*[A-Za-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/;
+    var passwordRegExp = /^[A-Za-z0-9!@#$%.&*+=?^_~-]+$/;
+
+    if (!(emailRegExp.test(userName.toLowerCase()))){
+        $("#registration-info").text("User name must be a valid email address.");
+        $("#regUserName").focus();
+        return;
+    }
+    if (userPassword1 !== userPassword2){
+        $("#registration-info").text("Passwords entered do not match.");
+        $("#regUserPassword2").focus();
+        return;
+    }
+    if (!((passwordRegExp.test((userPassword1))))){
+        $("#registration-info").text("Sorry, passwords can only consist of numbers, letters, or !@#$%^&*_~-+.");
+        $("#regUserPassword1").focus();
+        return;
+    }
+    if (userPassword1.length < 5){
+        $("#registration-info").text("Sorry, password must be between 5 and 50 characters.");
+        $("#regUserPassword1").focus();
+        return;
+    }
+    if (userPassword1.length > 100){
+        $("#registration-info").text("Sorry, password must be between 5 and 50 characters.");
+        $("#regUserPassword1").focus();
+        return;
+    }
+    //if everything validates then update goal info
+    registration_to_server();
+}
 	
 ///////////////////
 //misc functions
@@ -615,15 +660,14 @@ function validateGoalsForm()
 	
 	//get month length
 	
-	function getMonthLength(month)
-		{
+	function getMonthLength(month){
 			// these are the days of the week for each month, in order
 			var calDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];	
 			var monthLength;
 			
 			if (month === 2) // February only!
 			{ 
-				if (($.CurrentUserSettings.SelectedYear % 4 === 0 && $.CurrentUserSettings.SelectedYear % 100 !== 0) || $.CurrentUserSettings.SelectedYear % 400 === 0){
+				if (($.UserSettings.SelectedYear % 4 === 0 && $.UserSettings.SelectedYear % 100 !== 0) || $.UserSettings.SelectedYear % 400 === 0){
 					monthLength = 29;
 				} else {
 					monthLength = 28;
@@ -635,42 +679,84 @@ function validateGoalsForm()
 		}
 		
 	//useful function for finding presence of value in an array, returns true if present, false if not
-	$.findInArray = function(arr,obj) {
+	$.findInArray = function(arr,obj){
 			return (arr.indexOf(obj) !== -1);
 	}
 						
 	//set currently selected goal
-	function setSelectedGoal(goalNum)
-	{
-		$.CurrentUserSettings.SelectedGoal = goalNum;
-		document.forms["frmGoals"]["goalName"].value = $["Goal"+goalNum].Description;
-		document.forms["frmGoals"]["goalNote"].value = $["Goal"+goalNum].Notes;
-		document.forms["frmGoals"]["goalX"].value = $["Goal"+goalNum].XGoal;
-		$("#XColor").spectrum("set", $["Goal"+goalNum].XColor);
+	function setSelectedGoal(goalNum){
+		$.UserSettings.SelectedGoal = goalNum;
+		document.forms["frmGoals"]["goalName"].value = $.UserGoals["Goal"+goalNum].Description;
+		document.forms["frmGoals"]["goalNote"].value = $.UserGoals["Goal"+goalNum].Notes;
+		document.forms["frmGoals"]["goalX"].value = $.UserGoals["Goal"+goalNum].XGoal;
+		$("#XColor").spectrum("set", $.UserGoals["Goal"+goalNum].XColor);
 	}
-	
-	//animate transition from login to calendar
-	function transitionToCalendar()
-	{
-		document.getElementById('calendarContainer').className = 'transitionIn';
-		document.getElementById('loginPage').className = 'transitionOut';
-	}
-	function transitionToLogin()
-	{
-		document.getElementById('calendarContainer').className = 'transitionOut';
-		document.getElementById('loginPage').className = 'transitionIn';
-	}
-	
-	function launchLoginPage()
-	{
+
+	function launchLoginPage(){
 		//handle "Remember Me"
-		if ($.CurrentUserSettings.UserObj.RememberMe == true) {
-			document.forms["frmLogin"]["userName"].value = $.CurrentUserSettings.UserObj.UserName;
-			document.forms["frmLogin"]["userPassword"].value = $.CurrentUserSettings.UserObj.UserPassword;
+		if ($.CurrentUser.RememberMe == true) {
+			document.forms["frmLogin"]["userName"].value = $.CurrentUser.UserName;
+			document.forms["frmLogin"]["userPassword"].value = $.CurrentUser.UserPassword;
 			$('#rememberMe').prop("checked", true);
 		}
 		
 		$("#lnkLoginPage").click();
 		//$('#popupLogin').popup();
 		//$('#popupLogin').popup("open");
-	}	
+	}
+
+//-------------------------------------------------------------------------------------------
+//Calendar loading functions -- Called when login or new account creation is successful
+//-------------------------------------------------------------------------------------------
+
+//Launch Calendar
+function launchCalendar(){
+    greetUser();
+    rememberMe();
+    transitionToCalendar();
+}
+
+//Greet user
+function greetUser(){
+    if ($.CurrentUser.UserRealName.length < 1 || $.CurrentUser.UserRealName == null) {
+        alert("Welcome " + $.CurrentUser.UserName.toUpperCase());
+    } else {
+        alert("Welcome " + $.CurrentUser.UserRealName);
+    }
+}
+
+//Handle "Remember Me" checkbox -- If checked set RememberMe to true and write to local storage for retrieval on next login.
+// If unchecked, clear the frmLogin fields and set RememberMe to false and write to local storage.
+function rememberMe(){
+    if ($('#rememberMe').is(':checked') === true){
+        $.CurrentUser.RememberMe=true;
+        $.localStorage.setObject("CurrentUserSettings",$.UserSettings);
+    }
+    else {
+        document.forms["frmLogin"]["userName"].value = "";
+        document.forms["frmLogin"]["userPassword"].value = "";
+        $.CurrentUser.RememberMe=false;
+        $.localStorage.setObject("CurrentUserSettings",$.UserSettings);
+    }
+}
+
+//-------------------------------------------------------------------------------------------
+//Animated transitions between pages
+//-------------------------------------------------------------------------------------------
+function transitionToCalendar(){
+    document.getElementById('calendarContainer').className = 'transitionIn';
+    document.getElementById('registrationPage').className = 'transitionOut';
+    document.getElementById('loginPage').className = 'transitionOut'
+}
+function transitionToLogin(){
+    document.getElementById('calendarContainer').className = 'transitionOut';
+    document.getElementById('registrationPage').className = 'transitionOut';
+    document.getElementById('loginPage').className = 'transitionIn';
+    //$("#UserName").focus();
+}
+function transitionToRegistration(){
+    document.getElementById('calendarContainer').className = 'transitionOut';
+    document.getElementById('registrationPage').className = 'transitionIn';
+    document.getElementById('loginPage').className = 'transitionOut';
+    //$("#regUserName").focus();
+}

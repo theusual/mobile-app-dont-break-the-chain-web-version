@@ -28,9 +28,9 @@
 			}
 		</style>
 		
-        <script src="js/modernizr.custom.2.5.3.js"></script>
+        <script type="text/javascript" src="js/modernizr.custom.2.5.3.js"></script>
         <script type="text/javascript">
-/*            alert('Loading yepnope');
+            /*alert('Loading yepnope');
 			yepnope([
             {
               test: Modernizr.svg,
@@ -71,20 +71,56 @@
 			              <div data-role="fieldcontain"  id="login-group-rememberMe">
 						 	<fieldset data-role="controlgroup">
 								<input type="checkbox" name="rememberMe" id="rememberMe" class="custom" />
-								<center><label for="rememberMe">Remember Me</label></center>
+								<div style="text-align: center;"><label for="rememberMe">Remember Me</label></div>
 						    </fieldset>
 							</div>
 			       	 </form>
 			       <!--buttons-->
 			       <a href="#" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" onClick="login_to_server();">Login</a>
 				   <a href="#forgotPassword" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Forgot Your Password?</a>   
-				   <a href="#registerAccount" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Create A New Account</a>
-				   <hr>
-				   <div id="loginOr">-- OR -- </div>
+				   <a href="#" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" onClick="transitionToRegistration()">Create A New Account</a>
+				   <div id="loginOr">---- OR ---- </div>
 				  <a href="#loginGuest" data-role="button" class="loginButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span">Skip Login</a> 
 				 </div>
            </div>
 <!---------------------END LOGIN PAGE------------------------------------------------------------------>  
+<!----------------------------------------------------------------------------------------------------->
+<!---------------------BEGIN USER REGISTRATION PAGE----------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------>
+<div id="registrationPage">
+    <a href="#"  data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="top: 15px;left: 49.6%;z-index: 5000;" onClick="transitionToLogin();">Close</a>
+    <div id="regHeader" data-role="header">
+        Create A New Account
+    </div>
+    <div data-role="content" data-theme="a" style="padding:8px;" data-corners="true" role="main">
+        <div id="registration-info"></div>
+        <form name="frmRegistration">
+            <div data-role="fieldcontain" class="registration-form-line">
+                <div class="registration-label">E-mail Address:&nbsp;</div>
+                <div class="registration-input"> <input type="email" name="regUserName" id="regUserName" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div>
+            </div>
+            <div data-role="fieldcontain" class="registration-form-line">
+                <div class="registration-label">&nbsp;&nbsp;Password:</div>
+                <div class="registration-input"> <input type="password" name="regUserPassword1" id="regUserPassword1" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div>
+            </div>
+            <div data-role="fieldcontain" class="registration-form-line">
+                <div class="registration-label">&nbsp;&nbsp;Confirm Password:</div>
+                <div class="registration-input"> <input type="password" name="regUserPassword2" id="regUserPassword2" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div>
+            </div>
+            <div id="registrationOptional">---- OPTIONAL ---- </div>
+            <div data-role="fieldcontain" class="registration-form-line">
+                <div class="registration-label">Name:&nbsp;</div>
+                <div class="registration-input"> <input type="text" name="regRealName" id="regRealName" data-theme="a" data-mini="true" class="ui-input-text ui-body-a ui-corner-all ui-shadow-inset" style="width:100%"></div>
+            </div>
+        </form>
+        <hr style="margin-top: 12px;margin-bottom: 10px;">
+        <!--buttons-->
+        <a href="#registerAccount" data-role="button" class="registrationButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" onClick="validateRegistrationForm();">Create Account</a>
+        <a href="#" data-role="button" class="registrationButtons" data-inline="true" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" onClick="transitionToLogin();">Cancel</a>
+        <div id="privacyClause"> *E-mail is only used to recover a lost password, we respect your privacy. </div>
+    </div>
+</div>
+<!---------------------END USER REGISTRATION PAGE------------------------------------------------------>
 <!----------------------------------------------------------------------------------------------------->
 <!---------------------BEGIN CALENDAR CONTAINER--------------------------------------------------------> 	
  	  <div id="calendarContainer">
@@ -111,7 +147,7 @@
          	     </div>	
            	   </div>
         	</div>
-			<img src="img/blue_arrow.gif" width="75%" onClick="hideLegend()">
+			<img src="img/blue_arrow.gif" width="75%" onClick="toggleLegend()">
 		</div>
 	<!---------------------END SMALL LEGEND---------------------------------------------------------------->   	  	
 	<!---------------------BEGIN CALENDAR------------------------------------------------------------------>    
@@ -661,8 +697,8 @@
         End legend container hack--> 						
               <div class="legend" id="legend" style="position:relative">
                     <!----"X" Close button ----->
-                   <div data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" 		data-iconshadow="true" data-wrapperels="span" style="margin:2%; z-index:10000; right:-96%; top:-15px;" title="Close"  onClick="hideLegend()"><span class="ui-btn-inner ui-btn-corner-all" style="z-index:10000"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow" style="z-index:10000">&nbsp;</span></span>
-                   </div>
+                   <!--<div data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all ui-btn-icon-notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" style="margin:2%; z-index:10000; right:-96%; top:-15px;" title="Close"  onClick="toggleLegend()"><span class="ui-btn-inner ui-btn-corner-all" style="z-index:10000"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow" style="z-index:10000">&nbsp;</span></span> </div>
+                   ---><a href="#"  data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="margin:1%; top: -15px;left: 96%;z-index: 5000;" onClick="toggleLegend();">Close</a>
                     <!----Title ----->        
                    <div style="padding:1px 0 0 0;
                         text-align:center;
@@ -701,7 +737,7 @@
 	 		</div>
 	 		<!---Popup dialog to edit goal settings-- Must be at bottom of legend div -->
             <div data-role="popup" id="popupUpdateGoals" data-theme="a" data-overlay-theme="a" style="max-width:300px; border:2px solid #444;"  data-transition="pop" data-shadow="true" data-corners="true">
-					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right" style="left:95%;">Close</a>
 					<!-- <div style="padding:3px 0 4px 0;
 		       				text-align:center;
 		                    width:93%;

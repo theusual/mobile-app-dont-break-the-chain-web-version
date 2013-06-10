@@ -14,7 +14,7 @@ socket.on('error', function (reason){
 });
 socket.on('connect', function (){
     console.info('Successfully established a working and authorized connection');
-});
+ });
 
 //-------------------
 //Login related logic
@@ -22,34 +22,18 @@ socket.on('connect', function (){
 
 //Send login info to server
 function login_to_server(){
-	$.CurrentUserSettings.UserObj.UserName=document.forms["frmLogin"]["userName"].value;
-	$.CurrentUserSettings.UserObj.UserPassword=document.forms["frmLogin"]["userPassword"].value;
+	$.CurrentUser.UserName=document.forms["frmLogin"]["userName"].value;
+	$.CurrentUser.UserPassword=document.forms["frmLogin"]["userPassword"].value;
 	
 	//Goal1.id = userObj.userName+'_Goal1';	//Send User Name
-	socket.emit('UserAuthorize', $.CurrentUserSettings.UserObj);
-};
-//Receive token from server and load calendar if login is approved
-socket.on('LoginApproved', function  (sessionToken) {
-	alert("Welcome "+ $.CurrentUserSettings.UserObj.UserName);
-	//handle "Remember Me" checkbox
-	if ($('#rememberMe').is(':checked') === true)
-		rememberMe();
-	else {
-		document.forms["frmLogin"]["userName"].value = "";
-		document.forms["frmLogin"]["userPassword"].value = "";
-		$.CurrentUserSettings.UserObj.RememberMe=false;
-		$.localStorage.setObject("CurrentUserSettings",$.CurrentUserSettings);
-	}
-	storeToken(sessionToken);
-	transitionToCalendar();
-});
-
-//Handle "Remember Me"
-function rememberMe(){
-	//set RememberMe to true and write to local memory for retrieval on next login
-	$.CurrentUserSettings.UserObj.RememberMe=true;
-	$.localStorage.setObject("CurrentUserSettings",$.CurrentUserSettings);
+	socket.emit('UserAuthorize', $.CurrentUser);
 }
+
+//Store token from server and launch calendar
+socket.on('LoginApproved', function  (sessionToken) {
+    storeToken(sessionToken);
+    launchCalendar();
+});
 
 //Warn user if login is not approved
 socket.on('LoginDenied', function  (message) {
@@ -58,12 +42,67 @@ socket.on('LoginDenied', function  (message) {
 
 //Store token in memory for retrieval when communicating back to server after login
 function storeToken(sessionToken){
-	$.CurrentUserSettings.UserObj.SessionToken = sessionToken;
+	$.CurrentUser.SessionToken = sessionToken;
 }
 //Get token for comm with server
 function getToken()
 {
-	return $.CurrentUserSettings.UserObj.SessionToken;
+	return $.CurrentUser.SessionToken;
+}
+
+//---------------------------
+//Registration related logic
+//---------------------------
+
+//Send reg info to server
+function registration_to_server(){
+    console.log("Registering new account on server...");
+    $.CurrentUser.UserName=document.forms["frmRegistration"]["regUserName"].value;
+    $.CurrentUser.UserPassword=document.forms["frmRegistration"]["regUserPassword1"].value;
+    $.CurrentUser.UserRealName=document.forms["frmRegistration"]["regRealName"].value;
+
+    socket.emit('UserRegistration', $.CurrentUser);
+};
+
+//Handle successful registration: alert user, clear reg. form, store token from server, and launch calendar
+socket.on('RegistrationSuccessful', function  (sessionToken) {
+    storeToken(sessionToken);
+    registrationSuccessMessage();
+    clearRegistrationForm();
+    defaultLoginToRememberMe();
+    launchCalendar();
+});
+
+//Handle failed registration
+socket.on('RegistrationFailed', function  (message) {
+    registrationFailureMessage(message);
+});
+
+//Notify user that registration was successful
+function registrationSuccessMessage(){
+    alert("Registration Successful!  Your login is: "+ $.CurrentUser.UserName.toUpperCase());
+}
+//Notify user that registration failed. Highlight the offending field.
+function registrationFailureMessage(message){
+    //alert("Registration Failed: "+message);
+    $("#registration-info").text(message);
+    $("#regUserName").focus();
+}
+//clear registration form fields
+function clearRegistrationForm(){
+    document.forms["frmRegistration"]["regUserName"].value = "";
+    document.forms["frmRegistration"]["regUserPassword1"].value = "";
+    document.forms["frmRegistration"]["regUserPassword2"].value = "";
+    document.forms["frmRegistration"]["regRealName"].value = "";
+    $("#registration-info").text("");
+}
+
+//default the app to remember the user on login
+function defaultLoginToRememberMe(){
+    $.CurrentUser.RememberMe == true
+    document.forms["frmLogin"]["userName"].value = $.CurrentUser.UserName;
+    document.forms["frmLogin"]["userPassword"].value = $.CurrentUser.UserPassword;
+    $('#rememberMe').prop("checked", true);
 }
 
 //------------------------------------

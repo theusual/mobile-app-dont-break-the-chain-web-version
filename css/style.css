@@ -132,74 +132,156 @@ p{
 }
 /**************************** Login Page ****************************/
 #loginPage{
-	z-index: 200;
-	position: absolute;
-	margin: 0 0px 0 0;
-	float:left;
-	width: 80%;
-	left: 10%;
-	top: 2%;
-	background-color: rgba(255,255,255,.6);
-	transition: left .75s ease-in; 
-    -webkit-transition: left .75s ease-in; 
-    -moz-transition: left .75s ease-in; 
-    -o-transition: left .75s ease-in; 
-	/*
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	opacity: 1;
-	-webkit-animation-name: popin;
-	-moz-animation-name: popin;
-	-webkit-animation-duration: 350ms;
-	-moz-animation-duration: 350ms;
-	-webkit-animation-timing-function: ease-in-out;
-	-moz-animation-timing-function: ease-in-out;
-	-webkit-transform-origin: 50% 50%;
-	-moz-transform-origin: 50% 50%;*/
+    z-index: 200;
+    position: absolute;
+    margin: 0 0px 0 0;
+    float:left;
+    width: 80%;
+    left: 10%;
+    top: 2%;
+    background-color: rgba(255,255,255,.6);
+    transition: left .75s ease-in;
+    -webkit-transition: left .75s ease-in;
+    -moz-transition: left .75s ease-in;
+    -o-transition: left .75s ease-in;
+    /*
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    opacity: 1;
+    -webkit-animation-name: popin;
+    -moz-animation-name: popin;
+    -webkit-animation-duration: 350ms;
+    -moz-animation-duration: 350ms;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease-in-out;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;*/
 }
 #loginPage.transitionIn{
-	left: 10%;
+    left: 10%;
 }
 #loginPage.transitionOut{
-	left: 100%;
+    left: 100%;
 }
 .login-form-line{
-	margin:0px 0 9px 0; }
+    margin:0px 0 9px 0; }
 .login-input{
-	display:inline-block;
-	width: 55%;
+    display:inline-block;
+    width: 55%;
 }
 .login-label{
-	margin:0 1% 0 1%;
-	display:inline-block;
-	text-align:right;
-	line-height:1.8;
-		font-size:16px;
-	line-height:1;
-	font-weight:bold;
-	text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
-				 -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
-				 -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
-				 0 0 0.3em #006, 0 0 0.2em #006,
-        		 0 0 0.3em #006, 0 0 0.3em #006;
+    margin:0 1% 0 1%;
+    display:inline-block;
+    text-align:right;
+    line-height:1.8;
+    font-size:16px;
+    line-height:1;
+    font-weight:bold;
+    text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+    -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+    -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+    0 0 0.3em #006, 0 0 0.2em #006,
+    0 0 0.3em #006, 0 0 0.3em #006;
 }
 #login-group-rememberMe{
-	width: 39%;
-	left: 50%;
-	margin: .5em;
+    width: 39%;
+    left: 50%;
+    margin: .5em;
 }
 .loginButtons{
-	width: 90%;
-	display: block;
-	left: 5%;
-	padding-bottom: 1.5%;
-	margin-bottom: 1.5% !important;
-	font-size: 35px !important;
+    width: 90%;
+    display: block;
+    left: 5%;
+    padding-bottom: 1.5%;
+    margin-bottom: 1.5% !important;
+    font-size: 35px !important;
 }
 #loginOr{
     font-style: italic;
     margin-bottom: .5%;
 }
+
+/**************************** Registration Page ****************************/
+#registrationPage{
+    z-index: 200;
+    position: absolute;
+    margin: 0 0px 0 0;
+    float:left;
+    width: 80%;
+    left: 100%;
+    top: -2%;
+    transition: left .75s ease-in;
+    -webkit-transition: left .75s ease-in;
+    -moz-transition: left .75s ease-in;
+    -o-transition: left .75s ease-in;
+    /*
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    opacity: 1;
+    -webkit-animation-name: popin;
+    -moz-animation-name: popin;
+    -webkit-animation-duration: 350ms;
+    -moz-animation-duration: 350ms;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease-in-out;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;*/
+}
+#registrationPage.transitionIn{
+    left: 10%;
+}
+#registrationPage.transitionOut{
+    left: 100%;
+}
+.registration-form-line{
+    margin:0px 0 9px 0; }
+.registration-input{
+    display:inline-block;
+    width: 52%;
+}
+#registration-info{
+    color: rgb(245, 73, 96);
+    font-style: italic;
+    color: rgb(255, 56, 159);
+    padding-left: 100px;
+    padding-bottom: 8px;
+}
+.registration-label{
+    margin:0 1% 0 1%;
+    width: 160px;
+    display:inline-block;
+    text-align:right;
+    line-height:1.8;
+    font-size:16px;
+    line-height:1;
+    font-weight:bold;
+    text-shadow: -1px 0 #006, 0 1px #006, 1px 0 #006, 0 -1px #006,
+    -2px 0 #006, 0 2px #006, 2px 0 #006, 0 -2px #006,
+    -3px 0 #006, 0 3px #006, 3px 0 #006, 0 -3px #006,
+    0 0 0.3em #006, 0 0 0.2em #006,
+    0 0 0.3em #006, 0 0 0.3em #006;
+}
+.registrationButtons{
+    width: 90%;
+    display: block;
+    left: 5%;
+    padding-bottom: 1.5%;
+    margin-bottom: 1.5% !important;
+    font-size: 35px !important;
+}
+#registrationOptional{
+    font-style: italic;
+    margin-bottom: .5%;
+    margin-left: 165px;
+}
+#privacyClause{
+    font-style: italic;
+    margin-bottom: .5%;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
 /****************************Small Legend*************************/
 #smallLegendContainer{
 	width: 7%;
@@ -698,7 +780,7 @@ p{
 }
 /*****JQM CSS Overrides*****/
 .ui-btn-inner{
-	padding:4px 4px;
+    padding: 4px 4px 4px 4px;
 	/*font-size:13px;*/
 }
 .ui-btn-up-b{
