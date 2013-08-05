@@ -8,20 +8,20 @@
 			//Set current App settings
 			$.AppSettings = 
 				{
-					dbVersion: '.692',
-					testing: 'false'
+					dbVersion: '.698',
+					testing: 'true'
 				};	
 			//Run tests			
 			if($.AppSettings.testing === 'true')
-				alert('Starting app...');
+				console.log('Starting app...');
 				
 			if($.AppSettings.testing === 'true')
 				{
 					if(Modernizr.svg)
 						{
-							window.alert("working on SVG capable browser");
+							console.log("working on SVG capable browser");
 						}else {
-							window.alert("working on browser not supporting SVG.  Converting all graphics to canvas.");
+							console.log("working on browser not supporting SVG.  Converting all graphics to canvas.");
 					   }	
 				}
 			//disable the JQM loading message that is stuck at bottom of page
@@ -716,27 +716,29 @@ function launchCalendar(){
     transitionToCalendar();
 }
 
-//Greet user
+//Greet user if not in test mode
 function greetUser(){
-    if ($.CurrentUser.UserRealName.length < 1 || $.CurrentUser.UserRealName == null) {
-        alert("Welcome " + $.CurrentUser.UserName.toUpperCase());
-    } else {
-        alert("Welcome " + $.CurrentUser.UserRealName);
+    if ($.AppSettings.testing == false){
+        if ($.CurrentUser.UserRealName.length < 1 || $.CurrentUser.UserRealName == null) {
+            alert("Welcome " + $.CurrentUser.UserName.toUpperCase());
+        } else {
+            alert("Welcome " + $.CurrentUser.UserRealName);
+        }
     }
 }
 
 //Handle "Remember Me" checkbox -- If checked set RememberMe to true and write to local storage for retrieval on next login.
-// If unchecked, clear the frmLogin fields and set RememberMe to false and write to local storage.
+// If unchecked, clear the frmLogin fields and set RememberMe to false and update DBs
 function rememberMe(){
     if ($('#rememberMe').is(':checked') === true){
         $.CurrentUser.RememberMe=true;
-        $.localStorage.setObject("CurrentUserSettings",$.UserSettings);
+        updateDB_UserSettings();
     }
     else {
         document.forms["frmLogin"]["userName"].value = "";
         document.forms["frmLogin"]["userPassword"].value = "";
         $.CurrentUser.RememberMe=false;
-        $.localStorage.setObject("CurrentUserSettings",$.UserSettings);
+        updateDB_UserSettings();
     }
 }
 

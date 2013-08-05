@@ -17,7 +17,7 @@ socket.on('connect', function (){
  });
 
 //-------------------
-//Login related logic
+//Login related function
 //-------------------
 
 //Send login info to server
@@ -29,9 +29,10 @@ function login_to_server(){
 	socket.emit('UserAuthorize', $.CurrentUser);
 }
 
-//Store token from server and launch calendar
+//Store token from server, update user object to local storage, and launch calendar
 socket.on('LoginApproved', function  (sessionToken) {
     storeToken(sessionToken);
+    updateDB_CurrentUser();
     launchCalendar();
 });
 
@@ -45,13 +46,12 @@ function storeToken(sessionToken){
 	$.CurrentUser.SessionToken = sessionToken;
 }
 //Get token for comm with server
-function getToken()
-{
+function getToken(){
 	return $.CurrentUser.SessionToken;
 }
 
 //---------------------------
-//Registration related logic
+//Registration related functions
 //---------------------------
 
 //Send reg info to server
@@ -106,36 +106,32 @@ function defaultLoginToRememberMe(){
 }
 
 //------------------------------------
-//Goal and user settings related logic
+//User settings syncing related functions
 //------------------------------------
 
-//send goal updates to server
-function sync_goal_server (JSONgoal) {
-	socket.emit('SyncGoalServer', getToken(),JSONgoal);
-	alert('JSON goal update sent to server' + JSONgoal.id);				
-};
-//process goal updates from server
-function sync_goal_client (JSONgoal) {
-	alert('Goal update received for Goal: ' + JSONgoal.id)
-	var li = $('<li />').text(JSONgoal.id);
-	$('#goalLog').append(li);
-};
-//Receive goal updates from server
-socket.on('SyncGoalClient', function  (JSONgoal) {
-	sync_goal_client(JSONgoal);
-});
-function sync_user_connect (userNameObj) {
-	var liUser = $('<li id="'+userNameObj.userName+'">').text(userNameObj.userName);
-	$('#user').append(liUser);
-};
-function sync_user_disconnect (userNameObj) {
-	var liUser = $('<li />').text(userNameObj.userName);
-	$('#'+userNameObj.userName).empty();
-};
 //Receive user events
-socket.on('user_connect', function  (userNameObj) {
+socket.on('user_connect', function  (userNameObj){
 	sync_user_connect(userNameObj);
 });
-socket.on('user_disconnect', function  (userNameObj) {
+socket.on('user_disconnect', function  (userNameObj){
 	sync_user_disconnect(userNameObj);
+});
+
+//------------------------------------
+//Goal syncing related functions
+//------------------------------------
+//send goal updates to server
+function sync_goal_server(JSONgoal){
+    socket.emit('SyncGoalServer', getToken(),JSONgoal);
+    alert('JSON goal update sent to server' + JSONgoal);
+};
+//process goal updates from server
+function sync_goal_client (JSONgoal){
+    alert('Goal update received for Goal: ' + JSONgoal.id)
+    var li = $('<li />').text(JSONgoal.id);
+    $('#goalLog').append(li);
+};
+//Receive goal updates from server
+socket.on('SyncGoalClient', function  (JSONgoal){
+    sync_goal_client(JSONgoal);
 });

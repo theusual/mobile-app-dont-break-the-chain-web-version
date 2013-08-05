@@ -11,21 +11,21 @@ function checkDBVersion()
 		if ($.localStorage.getObject("AppSettings") === null) 
 			{
 				if($.AppSettings.testing === 'true')
-					alert('Local DB does not exist, building'); 
+					console.log('Local DB does not exist, building');
 				//createDB runs at end of purge function and loadDB runs at end of createDB function, so no need to call them seperately
 				purgeDB();
 				
 			} else if ($.localStorage.getObject("AppSettings").dbVersion < $.AppSettings.dbVersion)
 				{
 					if($.AppSettings.testing === 'true')
-						alert('Old version: ' + $.localStorage.getObject("AppSettings").dbVersion + '   Upgrading to version: '  + $.AppSettings.dbVersion);
+						console.log('Old version: ' + $.localStorage.getObject("AppSettings").dbVersion + '   Upgrading to version: '  + $.AppSettings.dbVersion);
 					//createDB runs at end of purge function and loadDB is not needed as the objects are created as part of the createDB process, so no need to call them seperately
 					purgeDB();																	
 				}
 			 else
 				{
 					if($.AppSettings.testing === 'true')
-						alert('Versions Match');
+						console.log('Versions Match');
 					//load all the stored objects into memory
 					loadDB();
 				}
@@ -34,7 +34,7 @@ function checkDBVersion()
 function purgeDB()
 	{	
 		if($.AppSettings.testing === 'true')
-			alert('Purging DB...');
+			console.log('Purging DB...');
 		
 		//purge all stored data
 		$.localStorage.clear();
@@ -68,7 +68,7 @@ function createDB(){
         UserName: '',
         UserPassword: '',
         SessionToken: '',
-        RememberMe: '',
+        RememberMe: 'false',
         UserRealName: ''
         };
 
@@ -95,13 +95,16 @@ function createDB(){
     //Write the newly created goal, user, and settings objects to DB
     updateDB_UserSettings();
     updateDB_CurrentUser();
-    updateDB_Goals('ALL');
+    updateDB_Goal('ALL');
 }
 	
 function loadDB(){
+    //load user object
+    $.CurrentUser = $.localStorage.getObject("CurrentUser");
     //load settings object
-    $.UserSettings = $.localStorage.getObject("CurrentUserSettings");
+    $.UserSettings = $.localStorage.getObject("UserSettings");
     //load goal objects
+    $.UserGoals = {};
     for (var i = 1; i<11 ; i++)
             $.UserGoals["Goal"+i] = $.localStorage.getObject("Goal"+i);
 
@@ -136,7 +139,7 @@ function removeDay(ClickedDate, DayDBLocation) //Remove the clicked day from the
 		//update object
 		$.UserGoals["Goal"+$.UserSettings.SelectedGoal].DayDate.splice(DayDBLocation,1);
 		//update the databases
-		updateDB_Goal($.UserSettings.SelectedGoal)				
+		updateDB_Goal($.UserSettings.SelectedGoal)
 	}
 		
 //function to clear goal progress for a single goal
@@ -155,15 +158,19 @@ function clearGoal(goalNum)
 	}
 
 //Write back goal info to the databases, send either goal names in the form of 'goal1' or send 'ALL' to write back all goals to DB
-//REPLACED BY updateDB_Goals() on 6/9/13 -- Because all goals were combined into 1 object and localstorage can only write back a parent object, can't nest them
-/*function updateDB_Goal(goalNum){
-     //alert('Updating goal' + goalNum);
-     if(goalNum === 'ALL')
-     for (var i = 1; i<11 ; i++)
-     $.localStorage.setObject('Goal'+i, $.UserGoals["Goal"+i]);
-     else
-     $.localStorage.setObject('Goal'+goalNum, $.UserGoals["Goal"+goalNum]);
- }   */
+function updateDB_Goal(goalNum){
+     alert('Updating goal ' + goalNum);
+     if(goalNum === 'ALL')  {
+         for (var i = 1; i<11 ; i++)
+         $.localStorage.setObject("Goal"+i, $.UserGoals["Goal"+i]);
+     }
+     else{
+        $.localStorage.setObject("Goal"+goalNum, $.UserGoals["Goal"+goalNum]);
+         sync_goal_server($.UserGoals["Goal"+goalNum]);
+     }
+ }
+//POSSIBLE replacement for udpateDB_Goal(goalNum) function IF all goals are combined into 1 object b/c localstorage can only write back a parent object, can't nest them
+//TODO:  DELETE if not needed
 function updateDB_Goals(){
     $.localStorage.setObject("UserGoals", $.UserGoals)
 }
